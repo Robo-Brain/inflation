@@ -75,12 +75,12 @@ public class MainController {
 
     @PostMapping("/savePrice")
     @ResponseBody
-    public void savePrice(@RequestParam Map<String,Integer> requestParams) {
+    public void savePrice(@RequestParam Map<String,String> requestParams) {
 
         String userId = userSettingsSession.get().getUserId();
-        Integer shopId = requestParams.get("shopId");
-        Integer productId = requestParams.get("productId");
-        Integer price = requestParams.get("price");
+        Integer shopId = Integer.parseInt(requestParams.get("shopId"));
+        Integer productId = Integer.parseInt(requestParams.get("productId"));
+        Integer price = Integer.parseInt(requestParams.get("price"));
         LocalDate date = LocalDate.now();
 
         Purchases purchases = purchasesRepo.findByUserIdAndShopIdAndProductIdAndDate(
