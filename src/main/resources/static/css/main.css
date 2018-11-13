@@ -14,12 +14,15 @@ body {
 }
 
 .logoAndName {
+    display: flex;
+    align-items:center;
     float: left;
     width: 49%;
-    height: 5em;
+    height: 4.5em;
     margin-bottom: 1em;
 }
 .shopSelect {
+    display: block;
     text-align: right;
 }
 .shopSelect select{
