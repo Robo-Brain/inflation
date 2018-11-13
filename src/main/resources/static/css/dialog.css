@@ -1,0 +1,150 @@
+.ui-dialogMobile {
+    width: 90% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    opacity: 0.95;
+}
+
+.ui-dialog-fail {
+    width: 90% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    opacity: 0.95;
+}
+
+.ui-dialogMobile fieldset {
+    border: none;
+}
+
+.ui-dialogMobile .ui-dialog-titlebar {
+    display: none;
+}
+
+.ui-dialogMobile .ui-dialog-content {
+    padding: 0 !important;
+}
+
+.ui-dialogMobile label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #286A91;
+    width: 100%;
+}
+
+.ui-dialogMobile input {
+    background-color: #e6faf5;
+    border: solid #286A91 1px;
+    width: 100%;
+    overflow: hidden;
+    margin: 0 0 0.6em 0;
+    padding: 0.1em;
+    font-size: 2em !important;
+}
+
+.ui-dialogMobile select {
+    background-color: #e6faf5;
+    border-radius: 2px;
+    width: 100%;
+    overflow: hidden;
+    margin: 0 0 0.6em 0;
+    padding: 0.1em;
+    font-size: 2em !important;
+}
+
+.ui-dialogMobile .ui-dialog-buttonset {
+    text-align: center;
+    margin: 0 auto;
+    float: none !important;
+}
+
+.ui-dialogMobile button {
+    width: 45%;
+    min-height: 2em !important;
+    line-height: 2em !important;
+    background-color: #5986A0;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid #286A91;
+    cursor: pointer;
+    color: #BDDCEE;
+    padding: 6px 8px;
+    text-decoration: none;
+    text-align: center;
+    vertical-align: middle;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+.ui-dialogMobile button:hover {
+    background-color: #286A91;
+    border: 1px solid #5986A0;
+    text-shadow: 0px 1px 1px #5986A0;
+    cursor: pointer;
+}
+
+.ui-dialogMobile .ui-dialog-buttonset button {
+    width: 45%;
+    min-height: 2em !important;
+    line-height: 2em !important;
+}
+
+.unhideLabel {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: #286A91;
+    width: 100%;
+}
+
+/* slider start */
+.ui-dialogMobile .switch {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 2em;
+    border: solid #286A91 1px;
+}
+
+.ui-dialogMobile .slider:before {
+    position: absolute;
+    content: "";
+    height: 1.8em;
+    width: 50%;
+    left: 0.1em;
+    bottom: 0.1em;
+    background-color: #044956;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.ui-dialogMobile input:checked + .slider:before {
+    -webkit-transform: translateX(98%);
+    -ms-transform: translateX(98%);
+    transform: translateX(98%);
+}
+
+/*slider end*/
+.mobileDialogText {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    padding: 1em 1em;
+    color: #286A91;
+    font-size: 2em;
+}
+
+#mobileText {
+    border: 1px solid #286A91;
+    background-color: #e6faf5;
+    width: 100%;
+    height: 5em;
+    padding: 0.1em;
+    resize: none;
+}
+
+.mobileApplyToCurrentMonth {
+    float: left;
+    width: 1.5em !important;
+    height: 1em;
+}

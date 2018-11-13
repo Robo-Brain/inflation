@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/inflation?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Moscow
+    username: root
+    password: 1ccc12
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate.jdbc.lob.non_contextual_creation: true
+    generate-ddl: true
+  thymeleaf:
+    cache: false
+
+security:
+  oauth2:
+    client:
+      clientId: 808339714243-9h9m9mik2oo1f975mhdbrc6872j35lro.apps.googleusercontent.com
+      clientSecret: dwSEnP73UdZlNLnhucwLYdta
+      accessTokenUri: https://www.googleapis.com/oauth2/v4/token
+      userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      clientAuthenticationScheme: form
+      scope: openid, email, profile
+    resource:
+      userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
+      preferTokenInfo: true
+

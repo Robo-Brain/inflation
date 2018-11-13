@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate.jdbc.lob.non_contextual_creation: true
+    generate-ddl: true
+  thymeleaf:
+    cache: false
+
+security:
+  oauth2:
+    client:
+      clientId: 808339714243-9h9m9mik2oo1f975mhdbrc6872j35lro.apps.googleusercontent.com
+      clientSecret: ${CLIENT_SECRET}
+      accessTokenUri: https://www.googleapis.com/oauth2/v4/token
+      userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      clientAuthenticationScheme: form
+      scope: openid, email, profile
+    resource:
+      userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
+      preferTokenInfo: true
+
+server:
+  port: ${PORT:8080}

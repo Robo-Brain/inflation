@@ -1,0 +1,34 @@
+<th:block sec:authorize="isAuthenticated()">
+    <div style="display: none" id="add">
+        <form>
+            <fieldset>
+                    <label for="name">Name: </label>
+                    <input type="text" id="name">
+            </fieldset>
+        </form>
+    </div>
+
+    <div id="goods">
+        <th:block th:each="product : ${goods}">
+            <div class="product">
+                <input class="price" th:id="${product.getId()}" type="number" />
+                <label th:text="${product.getName()}"></label>
+            </div>
+        </th:block>
+    </div>
+
+    <div id="addProduct">
+        <div class="add">+</div>
+    </div>
+
+    <div class="addForm">
+        <form>
+            <fieldset>
+                <label for="productName">Название: </label>
+                <input type="text" id="productName">
+            </fieldset>
+            <input id="submitNewProduct" type="button" value="Добавить" name="add" />
+            <input id="cancelNewProduct" type="button" value="Отмена" name="add" />
+        </form>
+    </div>
+</th:block>

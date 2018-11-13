@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <th:block th:include="_head"></th:block>
+<body>
+
+    <div sec:authorize="isAuthenticated()">
+        <img th:src="${user.getUserpic()}" alt="userpic" /> &nbsp;
+        <span class="top">
+            <span th:text="${user.getName()}">Anonymous</span>,
+        </span>
+        <p>Your default shop is:<br />
+            <select id="shops" th:field="*{shops}">
+                <option th:each="shop : ${shops}" th:value="${shop.getId()}" th:text="${shop.getName()}"></option>
+                <option class="addShopOption" value="0">Add the shop</option>
+            </select>
+        </p>
+    </div>
+    <div class="login" sec:authorize="isAnonymous()">
+        Required login with
+        <a href="/login">
+            <blue>G</blue><red>o</red><yellow>o</yellow><blue>g</blue><green>l</green><red>e</red>
+        </a>
+    </div>
+
+    <th:block th:include="_content"></th:block>
+
+    <script th:inline="javascript">
+        shops = /*[[${shops}]]*/ "";
+        userSettings = /*[[${userSettings}]]*/ "";
+        goods = /*[[${goods}]]*/ "";
+
+        var productList = [];
+        // console.log(goods);
+
+        $('#shops option').filter(function() {
+            return $(this).val() == userSettings.shopId;
+        }).prop('selected', true);
+
+        $('#shops').on('change', function() {
+            var id = $(this).children(":selected").attr("value");
+            console.log(id);
+            if(id != 0) {
+                changeShop(id);
+            } else {
+                addShop();
+            }
+        });
+
+        $('.price').on("input change paste keyup", function() {
+            var id = $(this).attr('id');
+            var val = Math.round($(this).val());
+            var shop = $('#shops').children(":selected").val();
+            setTimeout(function () {
+                savePrice(shop, id, val);
+            }, 1000)
+        });
+
+        $('#addProduct').click(function () {
+            goods.forEach(function (value) { productList.push(value.name) });
+            $(this).toggleClass('clicked');
+            setTimeout(function () {
+                $('.addForm').attr('class', 'showAddForm');
+            }, 500);
+            console.log(productList)
+        });
+
+        $("#productName").autocomplete({
+            position: { my : "center bottom", at: "left top" },
+            classes: {
+                "ui-autocomplete": "productAutocomplete"
+            },
+            delay: 300,
+            minLength: 2,
+            source: productList
+        });
+
+    </script>
+</body>
+</html>
