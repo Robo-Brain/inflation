@@ -123,4 +123,25 @@ function addProduct() {
     });
 }
 
+$(function() {
+
+    $('#addProduct').click(function () {
+        goods.forEach(function (value) { productList.push(value.name) });
+        $(this).toggleClass('clicked');
+        setTimeout(function () {
+            $('.addForm').attr('class', 'showAddForm');
+        }, 500);
+    });
+
+    $('#cancelNewProduct').click(function () {
+        setTimeout(function () {
+            $('.showAddForm').attr('class', 'addForm');
+        }, 500);
+        setTimeout(function () {
+            $('#addProduct').toggleClass('clicked');
+        }, 500);
+    });
+
+});
+
 $(function() {});

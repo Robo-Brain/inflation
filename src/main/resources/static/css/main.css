@@ -14,21 +14,30 @@ body {
 }
 
 .logoAndName {
-    display: flex;
-    align-items:center;
+    float: left;
+    width: 49%;
+    height: 5em;
+    margin-bottom: 1em;
 }
-
-.top {
+.shopSelect {
+    text-align: right;
+}
+.shopSelect select{
+    margin-top: 0.2em;
     font-size: 1.5em;
-}
-
-#shops {
-    font-size: 1.2em;
-    margin-top: 0.4em;
 }
 .addShopOption {
     text-align: center;
     color: #FF0000;
+}
+
+.top {
+    clear: left;
+    font-size: 1.5em;
+}
+
+#goods {
+    clear: left;
 }
 
 .login {
@@ -60,21 +69,22 @@ body {
 .login a green {color: #34A853;}
 
 .product{
-    margin-bottom: 0.6em;
-    height: 2em;
+    margin-bottom: 1.4em;
+    height: 2.2em;
 }
 .product label{
     display: inline-block;
     vertical-align: middle;
-    width: 76%;
+    width: 72%;
     margin-right: 2%;
+    font-size: 1.2em;
 }
 .product input{
     display: inline-block;
     vertical-align: middle;
-    line-height: 1.5em;
-    font-size: 1.4em;
-    width: 20%;
+    line-height: 1.6em;
+    font-size: 1.6em;
+    width: 24%;
 }
 
 #addProduct {
@@ -131,7 +141,7 @@ body {
     width: 96%;
     background-color: #1faee9;
     position: absolute;
-    top: 78%;
+    top: 80%;
     border: none;
     left: 2%;
     height: 17%;

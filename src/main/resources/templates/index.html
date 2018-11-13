@@ -3,20 +3,6 @@
     <th:block th:include="_head"></th:block>
 <body>
 
-    <div sec:authorize="isAuthenticated()">
-        <div class="logoAndName">
-            <img width="36px" height="36px" th:src="${user.getUserpic()}" /> &nbsp;
-            <span class="top">
-                <span th:text="${user.getName()}">Anonymous</span>,
-            </span>
-        </div>
-        <p>Your default shop is:<br />
-            <select id="shops" th:field="*{shops}">
-                <option th:each="shop : ${shops}" th:value="${shop.getId()}" th:text="${shop.getName()}"></option>
-                <option class="addShopOption" value="0">Add the shop</option>
-            </select>
-        </p>
-    </div>
     <div class="login" sec:authorize="isAnonymous()">
         Required login with
         <a href="/login">
@@ -24,7 +10,24 @@
         </a>
     </div>
 
-    <th:block th:include="_content"></th:block>
+    <th:block sec:authorize="isAuthenticated()">
+        <div class="logoAndName">
+            <img width="36px" height="36px" th:src="${user.getUserpic()}" /> &nbsp;
+            <span class="top">
+                <span th:text="${user.getName()}">Anonymous</span>,
+            </span>
+        </div>
+        <div class="logoAndName shopSelect">
+            Your default shop is:<br />
+            <select id="shops" th:field="*{shops}">
+                <option th:each="shop : ${shops}" th:value="${shop.getId()}" th:text="${shop.getName()}"></option>
+                <option class="addShopOption" value="0">Add the shop</option>
+            </select>
+        </div>
+
+        <th:block th:include="_content"></th:block>
+
+    </th:block>
 
     <script th:inline="javascript">
         shops = /*[[${shops}]]*/ "";
@@ -55,15 +58,6 @@
             setTimeout(function () {
                 savePrice(shop, id, val);
             }, 1000)
-        });
-
-        $('#addProduct').click(function () {
-            goods.forEach(function (value) { productList.push(value.name) });
-            $(this).toggleClass('clicked');
-            setTimeout(function () {
-                $('.addForm').attr('class', 'showAddForm');
-            }, 500);
-            console.log(productList)
         });
 
         $("#productName").autocomplete({
