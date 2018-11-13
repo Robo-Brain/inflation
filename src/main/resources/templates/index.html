@@ -4,7 +4,7 @@
 <body>
 
     <div sec:authorize="isAuthenticated()">
-        <img th:src="${user.getUserpic()}" alt="userpic" /> &nbsp;
+        <img width="150px" height="150px" th:src="${user.getUserpic()}" alt="userpic" /> &nbsp;
         <span class="top">
             <span th:text="${user.getName()}">Anonymous</span>,
         </span>
