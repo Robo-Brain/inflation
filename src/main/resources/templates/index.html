@@ -4,10 +4,12 @@
 <body>
 
     <div sec:authorize="isAuthenticated()">
-        <img width="36px" height="36px" th:src="${user.getUserpic()}" alt="userpic" /> &nbsp;
-        <span class="top">
-            <span th:text="${user.getName()}">Anonymous</span>,
-        </span>
+        <div class="logoAndName">
+            <img width="36px" height="36px" th:src="${user.getUserpic()}" /> &nbsp;
+            <span class="top">
+                <span th:text="${user.getName()}">Anonymous</span>,
+            </span>
+        </div>
         <p>Your default shop is:<br />
             <select id="shops" th:field="*{shops}">
                 <option th:each="shop : ${shops}" th:value="${shop.getId()}" th:text="${shop.getName()}"></option>
