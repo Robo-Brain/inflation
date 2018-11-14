@@ -116,8 +116,9 @@ body {
     top: 50%;
     left: 50%;
     margin-right: -50%;
-    transform: translate(-50%, -50%)
+    transform: translate(-50%, -50%);
 }
+
 .showProductForm {
     opacity: 1;
     left: 4%;
@@ -141,49 +142,29 @@ body {
 .showProductForm a{
     display: inline-block;
     width: 5%;
-    margin : 0 0.3em 0 0.5em;
+    margin : 0 0.4em 0 1.1em;
     font-size: 1.4em;
     color: #fff;
     text-decoration: none;
 }
+.cancelNewProduct {
+    font-size: 1.8em !important;
+}
+/*#productName::-webkit-search-cancel-button{*/
+    /*position:relative;*/
+    /*right:0px;*/
+    /*-webkit-appearance: none;*/
+    /*height: .5em;*/
+    /*width: .5em;*/
+    /*background: #000;*/
+/*}*/
 
-.addForm {
-    display: block;
-    width: 80%;
-    position: absolute;
-    left: -100%;
-    transition: left .2s linear;
-}
-.showAddForm {
-    display: block;
-    width: 96%;
-    background-color: #1faee9;
-    position: fixed;
-    top: 80%;
-    border: none;
-    left: 2%;
-    height: 17%;
-    transition: left .2s linear;
-    font-size: 1.2em;
-}
-.showAddForm fieldset {
-    border: none;
-    /*margin: 1% !important;*/
-    padding: 2% 1% 4% 1% !important;
-}
-.showAddForm input {
-    font-size: 1.6em;
-    padding: 0.1em;
-}
-
-#productName { /* input */
-    width: 68%;
-}
 .productAutocomplete {
     width: 90% !important;
     left: 1.5% !important;
-    background-color: #a6ddf5;
+    background-color: #fff;
     font-size: 1.5em;
+    border: solid red 1px;
 }
 .productAutocomplete ul{
     list-style: none !important;
@@ -194,4 +175,9 @@ body {
     list-style: none !important;
     padding: 0.3em 0 0.3em 0 !important;
     margin: 0 !important;
+    border-bottom: dotted gray 1px;
+}
+
+.ui-helper-hidden-accessible {
+    display: none !important;
 }

@@ -38,7 +38,7 @@
         goods = /*[[${goods}]]*/ "";
 
         var productList = [];
-        // console.log(goods);
+        goods.forEach(function (value) { productList.push(value.name) });
 
         $('#shops option').filter(function() {
             return $(this).val() == userSettings.shopId;
@@ -67,16 +67,19 @@
             showAddProductForm(e);
         });
         $('.add').click(function (e) {
+            $(this).toggle();
             showAddProductForm(e);
         });
 
+        $('#submitNewProduct').click(function () {
+            submitNewProduct();
+        });
 
         $("#productName").autocomplete({
             position: { my : "center bottom", at: "left top" },
             classes: {
                 "ui-autocomplete": "productAutocomplete"
             },
-            delay: 300,
             minLength: 2,
             source: productList
         });

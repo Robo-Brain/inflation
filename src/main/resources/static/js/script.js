@@ -76,9 +76,6 @@ function savePrice(shopId, productId, price) {
         type: 'POST',
         data: jQuery.param({ shopId: shopId, productId: productId, price : price}) ,
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-        success: function (response) {
-            //Do Something
-        },
         error: function () {
             //Do Something
         }
@@ -86,68 +83,50 @@ function savePrice(shopId, productId, price) {
 }
 
 function showAddProductForm(e) {
-    goods.forEach(function (value) { productList.push(value.name) });
-    $('.add').show();
+    // if ($('.addProduct').hasClass('showProductForm')) {
+    //     $('.add').show();
+    // };
     var cls = $(e.target).attr('class');
-    console.log(cls);
     if (cls == 'addProduct' || cls == 'cancelNewProduct'){
-        $('.addProduct').toggleClass("showProductForm")
+        $('.addProduct').toggleClass("showProductForm");
+        $('.add').toggle();
     } else if(cls == 'add') {
-        $('.addProduct').addClass("showProductForm")
+        $('.addProduct').addClass("showProductForm");
+        $('.add').toggle();
     }
 }
-function addProduct() {
-    $("#add").dialog({
-        classes: {
-            "ui-dialog": "ui-dialogMobile"
-        },
-        resizable: false,
-        height: "auto",
-        width: 400,
-        modal: true,
-        buttons: {
-            "Add": function() {
-                $( this ).dialog('close');
-                var name = $('#addName').val();
-                $.post("/addProduct?name=" + name)
-                    .done(function () {
-                        new Noty({
-                            type: 'success',
-                            theme: 'metroui',
-                            text: 'Новый продукт добавлен.',
-                            timeout: 5000
-                        }).show();
-                    })
-                    .fail(function () {
-                        new Noty({
-                            type: 'error',
-                            theme: 'metroui',
-                            text: 'Ошибка. Невозможно добавить продукт.',
-                            timeout: 5000
-                        }).show();
-                    })
-            },
-            Cancel: function() {
-                $(this).dialog('close');
-            }
-        }
-    });
+function submitNewProduct() {
+    var name = $('#productName').val();
+    if(!!name || name != '')
+        $.post("/addProduct?name=" + name)
+            .done(function () {
+                setTimeout(function() {
+                    location.reload();
+                }, 3000);
+                new Noty({
+                    type: 'success',
+                    theme: 'metroui',
+                    text: 'Новый продукт успешно добавлен.',
+                    timeout: 3000
+                }).show();
+            })
+            .fail(function () {
+                new Noty({
+                    type: 'error',
+                    theme: 'metroui',
+                    text: 'Ошибка. Не удалось добавить продукт.',
+                    timeout: 5000
+                }).show();
+            });
+    else {
+        new Noty({
+            type: 'error',
+            theme: 'metroui',
+            text: 'Ошибка. Укажите название продукта.',
+            timeout: 5000
+        }).show();
+
+    }
 }
-
-$(function() {
-
-
-
-
-    // $('#cancelNewProduct').click(function () {
-    //     setTimeout(function () {
-    //         $('.showAddForm').attr('class', 'addForm');
-    //     }, 500);
-    //     setTimeout(function () {
-    //         $('#addProduct').toggleClass('clicked');
-    //     }, 500);
-    // });
-
-});
 
 $(function() {});

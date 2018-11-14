@@ -46,7 +46,7 @@ public class MainController {
             model.addAttribute("userSettings", userSettingsSession.get());
 
             model.addAttribute("shops", shopsRepo.findAll());
-            model.addAttribute("goods", goodsRepo.findAll());
+            model.addAttribute("goods", goodsRepo.findAllOrOrderByNameAsc());
         }
     }
 
