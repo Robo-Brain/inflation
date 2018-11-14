@@ -17,19 +17,24 @@
         </th:block>
     </div>
 
-    <div id="addProduct">
+    <div class="addProduct">
         <div class="add">+</div>
+        <div class="productForm">
+            <input type="text" />
+            <a id="submitNewProduct" href="#">✓ </a>
+            <a class="cancelNewProduct" id="cancelNewProduct" href="#"> X</a>
+        </div>
     </div>
 
-    <div class="addForm">
-        <form>
-            <fieldset>
-                <label for="productName">Название: </label>
-                <input type="text" id="productName">
-            </fieldset>
-            <input id="submitNewProduct" type="button" value="Добавить" name="add" />
-            <input id="cancelNewProduct" type="button" value="Отмена" name="add" />
-        </form>
-    </div>
+    <!--<div class="addForm">-->
+        <!--<form>-->
+            <!--<fieldset>-->
+                <!--<label for="productName">Название: </label>-->
+                <!--<input type="text" id="productName">-->
+            <!--</fieldset>-->
+            <!--<input id="submitNewProduct" type="button" value="Добавить" name="add" />-->
+            <!--<input id="cancelNewProduct" type="button" value="Отмена" name="add" />-->
+        <!--</form>-->
+    <!--</div>-->
 
 </th:block>

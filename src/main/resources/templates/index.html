@@ -60,6 +60,16 @@
             }, 1000)
         });
 
+        $('.addProduct').click(function (e) {
+            goods.forEach(function (value) { productList.push(value.name) });
+            $('.add').show();
+            var cls = $(e.target).attr('class');
+            if (cls == 'addProduct' || cls == 'cancelNewProduct'){
+                $(this).toggleClass("showProductForm")
+            }
+        });
+
+
         $("#productName").autocomplete({
             position: { my : "center bottom", at: "left top" },
             classes: {
