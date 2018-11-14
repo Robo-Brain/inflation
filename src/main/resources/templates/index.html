@@ -1,14 +1,17 @@
-<!doctype html>
+<!doctype html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <th:block th:include="_head"></th:block>
 <body>
 
-    <div class="login" sec:authorize="isAnonymous()">
+
+<th:block sec:authorize="isAnonymous()">
+    <div class="login">
         Required login with
         <a href="/login">
             <blue>G</blue><red>o</red><yellow>o</yellow><blue>g</blue><green>l</green><red>e</red>
         </a>
     </div>
+</th:block>
 
     <th:block sec:authorize="isAuthenticated()">
         <div class="logoAndName">
@@ -61,12 +64,10 @@
         });
 
         $('.addProduct').click(function (e) {
-            goods.forEach(function (value) { productList.push(value.name) });
-            $('.add').show();
-            var cls = $(e.target).attr('class');
-            if (cls == 'addProduct' || cls == 'cancelNewProduct'){
-                $(this).toggleClass("showProductForm")
-            }
+            showAddProductForm(e);
+        });
+        $('.add').click(function (e) {
+            showAddProductForm(e);
         });
 
 

@@ -97,7 +97,7 @@ body {
     height: 5em;
     position: fixed;
     bottom: 3%;
-    left: 77%;
+    left: 82%;
     background-color: #FF0000;
     border-radius: 2.5em;
     text-decoration: none;
@@ -120,8 +120,8 @@ body {
 }
 .showProductForm {
     opacity: 1;
-    left: 5%;
-    width: 87%;
+    left: 4%;
+    width: 92%;
     border-radius: 5em;
     bottom: 3%;
 }
@@ -141,8 +141,8 @@ body {
 .showProductForm a{
     display: inline-block;
     width: 5%;
-    margin : 0 0.2em 0 0.5em;
-    font-size: 1.2em;
+    margin : 0 0.3em 0 0.5em;
+    font-size: 1.4em;
     color: #fff;
     text-decoration: none;
 }

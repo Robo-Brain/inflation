@@ -85,6 +85,17 @@ function savePrice(shopId, productId, price) {
     });
 }
 
+function showAddProductForm(e) {
+    goods.forEach(function (value) { productList.push(value.name) });
+    $('.add').show();
+    var cls = $(e.target).attr('class');
+    console.log(cls);
+    if (cls == 'addProduct' || cls == 'cancelNewProduct'){
+        $('.addProduct').toggleClass("showProductForm")
+    } else if(cls == 'add') {
+        $('.addProduct').addClass("showProductForm")
+    }
+}
 function addProduct() {
     $("#add").dialog({
         classes: {
