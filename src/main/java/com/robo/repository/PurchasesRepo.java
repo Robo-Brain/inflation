@@ -12,7 +12,7 @@ public interface PurchasesRepo extends JpaRepository<Purchases, Integer> {
         
 //     Optional<Purchases> findByShopIdStartingWith(Integer num);
     
-   @Query("SELECT p FROM Purchases p WHERE p.shopId LIKE :num%")
+   @Query("SELECT p FROM Purchases p WHERE p.shopId LIKE :num ||'%'")
    Optional<Purchases> findByShopIdStartingWith(@Param("num") Integer num);
 
 }
