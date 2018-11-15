@@ -7,9 +7,4 @@ import java.util.Optional;
 
 public interface ShopsRepo extends JpaRepository<Shops, Integer> {
     Optional<Shops> findByName(String name);
-    
-//     List<Shops> findByNameStartingWith(String letter);
-    
-   @Query("SELECT s FROM Shops AS s WHERE s.name LIKE :letter%")
-   Optional<Shops> findByNameStartingWith(@Param("letter") String letter);
 }
