@@ -49,7 +49,7 @@ public class MainController {
             model.addAttribute("shops", shopsRepo.findAll());
             model.addAttribute("goods", goodsRepo.findAllOrderByNameAsc());
             
-            model.addAttribute("pu", purchasesRepo.findByShopIdStartingWith(1));
+            model.addAttribute("pu", goodsRepo.findByNameStartingWith("К"));
         }
     }
 
