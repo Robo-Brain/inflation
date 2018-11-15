@@ -26,6 +26,6 @@ security:
 server:
   port: ${PORT:8080}
 
-logging:
-  level:
-    ROOT: DEBUG
+# logging:
+#   level:
+#     ROOT: DEBUG
