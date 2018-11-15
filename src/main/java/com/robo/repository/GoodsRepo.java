@@ -17,7 +17,7 @@ public interface GoodsRepo extends JpaRepository<Goods, Integer> {
 
 //    List<Goods> findByNameStartingWith(String letter);
 
-    @Query("SELECT g FROM Goods g WHERE g.name LIKE CONCAT('%',:letter,'%')")
+    @Query("SELECT g FROM Goods g WHERE g.name LIKE :letter%")
     List<Goods> findByNameStartingWith(@Param("letter") String letter);
 
 }
