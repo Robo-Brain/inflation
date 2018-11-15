@@ -104,12 +104,12 @@ public class MainController {
         purchasesRepo.saveAndFlush(purchases);
     }
 
-    @RequestMapping(value="/goodsFilter", method=RequestMethod.GET)
-    @ResponseBody
-    public List<Goods> goodsFilter(@RequestParam String letter) {
-        System.out.println("letter: " + letter);
-        goodsRepo.findByNameStartingWith(letter).forEach(product -> System.out.println(product.getName()));
-        return goodsRepo.findByNameStartingWith(letter);
-    }
+//     @RequestMapping(value="/goodsFilter", method=RequestMethod.GET)
+//     @ResponseBody
+//     public List<Goods> goodsFilter(@RequestParam String letter) {
+//         System.out.println("letter: " + letter);
+//         goodsRepo.findByNameStartingWith(letter).forEach(product -> System.out.println(product.getName()));
+//         return goodsRepo.findByNameStartingWith(letter);
+//     }
 
 }
