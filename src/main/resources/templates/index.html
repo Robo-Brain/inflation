@@ -3,25 +3,26 @@
     <th:block th:include="_head"></th:block>
 <body>
 
-
-<th:block sec:authorize="isAnonymous()">
-    <div class="login">
-        Required login with
-        <a href="/login">
-            <blue>G</blue><red>o</red><yellow>o</yellow><blue>g</blue><green>l</green><red>e</red>
-        </a>
-    </div>
-</th:block>
+    <th:block sec:authorize="isAnonymous()">
+        <div class="login">
+            Required login with
+            <a href="/login">
+                <blue>G</blue><red>o</red><yellow>o</yellow><blue>g</blue><green>l</green><red>e</red>
+            </a>
+        </div>
+    </th:block>
 
     <th:block sec:authorize="isAuthenticated()">
+        <div id="wrap"></div>
+
         <div class="logoAndName">
             <img width="36px" height="36px" th:src="${user.getUserpic()}" /> &nbsp;
             <span class="top">
                 <span th:text="${user.getName()}">Anonymous</span>,
             </span>
         </div>
+
         <div class="logoAndName shopSelect">
-            Your default shop is:<br />
             <select id="shops" th:field="*{shops}">
                 <option th:each="shop : ${shops}" th:value="${shop.getId()}" th:text="${shop.getName()}"></option>
                 <option class="addShopOption" value="0">Add the shop</option>
@@ -30,7 +31,13 @@
 
         <th:block th:include="_content"></th:block>
 
+        <div class="addShop">
+            <input type="search" placeholder="Название магазина:" />
+        </div>
+
+
     </th:block>
+
 
     <script th:inline="javascript">
         shops = /*[[${shops}]]*/ "";
@@ -40,17 +47,23 @@
         var productList = [];
         goods.forEach(function (value) { productList.push(value.name) });
 
+        $('#wrap').click(function () {
+            wrapClose();
+        });
+
         $('#shops option').filter(function() {
             return $(this).val() == userSettings.shopId;
         }).prop('selected', true);
 
         $('#shops').on('change', function() {
             var id = $(this).children(":selected").attr("value");
-            console.log(id);
             if(id != 0) {
                 changeShop(id);
             } else {
-                addShop();
+                $('.addShop').addClass("showShopForm");
+                $('#wrap').show();
+                $('.addShopInput').show();
+                $(this).val(userSettings.shopId);
             }
         });
 

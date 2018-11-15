@@ -12,6 +12,6 @@ public interface GoodsRepo extends JpaRepository<Goods, Integer> {
     Optional<Goods> findByName(String name);
 
     @Query("SELECT g FROM Goods g ORDER BY g.name ASC")
-    List<Goods> findAllOrOrderByNameAsc();
+    List<Goods> findAllOrderByNameAsc();
 
 }

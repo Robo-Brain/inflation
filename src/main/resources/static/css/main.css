@@ -13,34 +13,8 @@ body {
     min-width: 480px;
 }
 
-.logoAndName {
-    display: flex;
-    align-items:center;
-    float: left;
-    width: 49%;
-    height: 4.5em;
-    margin-bottom: 1em;
-}
-.shopSelect {
-    display: block;
-    text-align: right;
-}
-.shopSelect select{
-    margin-top: 0.2em;
-    font-size: 1.5em;
-}
-.addShopOption {
-    text-align: center;
-    color: #FF0000;
-}
-
-.top {
-    clear: left;
-    font-size: 1.5em;
-}
-
-#goods {
-    clear: left;
+input {
+    outline: none;
 }
 
 .login {
@@ -71,6 +45,70 @@ body {
 .login a yellow {color: #FBBC05;}
 .login a green {color: #34A853;}
 
+#wrap {
+    height:100%;
+    width: 100%;
+    position:fixed;
+    left: 0;
+    top:0;
+    background-color:rgba(0,0,0,.5);
+    z-index: 3;
+    display: none;
+}
+
+.logoAndName {
+    display: flex;
+    align-items:center;
+    float: left;
+    width: 49%;
+    height: 4.5em;
+    margin-bottom: 1em;
+}
+.shopSelect {
+    display: block;
+    text-align: right;
+}
+#shops {
+    font-size: 1.5em;
+    margin-top: 1em;
+}
+.addShopOption {
+    text-align: center;
+    color: #FF0000;
+}
+.addShop {
+    width: 90%;
+    font-size: 1.5em;
+    margin-top: 1em;
+    position: fixed;
+    top:80%;
+    left: -100%;
+    z-index: 4;
+    -webkit-transition: all 0.5s ease-out;
+    -moz-transition: all 0.5s ease-out;
+    -o-transition: all 0.5s ease-out;
+    transition: all 0.5s ease-out;
+}
+.showShopForm {
+     left: 5% !important;
+    -webkit-transition: all 0.5s ease-in;
+    -moz-transition: all 0.5s ease-in;
+    -o-transition: all 0.5s ease-in;
+    transition: all 0.5s ease-in;
+ }
+.addShop input {
+    width: 100%;
+    font-size: 1.5em;
+}
+
+.top {
+    clear: left;
+    font-size: 1.5em;
+}
+
+#goods {
+    clear: left;
+}
 .product{
     margin-bottom: 1.4em;
     height: 2.2em;
@@ -88,8 +126,8 @@ body {
     line-height: 1.6em;
     font-size: 1.6em;
     width: 24%;
+    z-index: 2;
 }
-
 .addProduct {
     display: block;
     opacity: 0.6;
@@ -106,8 +144,9 @@ body {
     -moz-transition: all 0.8s ease;
     -o-transition: all 0.8s ease;
     transition: all 0.8s ease;
+    z-index: 1;
 }
-.addProduct .productForm { display: none; }
+.addProduct .productForm { display: none; z-index: 4; }
 .addProduct:hover { opacity: 1; }
 .add {
     font-size: 2em;
@@ -117,14 +156,15 @@ body {
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
+    z-index: 4;
 }
-
 .showProductForm {
     opacity: 1;
     left: 4%;
     width: 92%;
     border-radius: 5em;
     bottom: 3%;
+    z-index: 4;
 }
 .showProductForm .productForm{
     display: block;
@@ -137,7 +177,6 @@ body {
     line-height: 1.9em;
     padding: 0.1em 1em 0.1em 1em;
     border-radius: 1em;
-    outline: none;
 }
 .showProductForm a{
     display: inline-block;
@@ -165,6 +204,7 @@ body {
     background-color: #fff;
     font-size: 1.5em;
     border: solid red 1px;
+    z-index: 4;
 }
 .productAutocomplete ul{
     list-style: none !important;
