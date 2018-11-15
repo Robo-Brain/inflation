@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL}
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: mysql://sql7.freemysqlhosting.net/sql7265590
+    username: sql7265590
+    password: 5ipVBwtnyn
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate.jdbc.lob.non_contextual_creation: true
