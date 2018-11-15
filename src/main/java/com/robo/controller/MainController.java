@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -66,7 +67,9 @@ public class MainController {
     @PostMapping("/addShop")
     @ResponseBody
     public void addShop(@RequestParam("name") String name) {
-        shopsRepo.save(new Shops(name));
+
+        shopsRepo.findByName(name).orElseGet(() -> shopsRepo.save(new Shops(name)));
+
     }
 
     @PostMapping("/addProduct")
@@ -97,6 +100,14 @@ public class MainController {
                 )));
         purchases.setPrice(price);
         purchasesRepo.saveAndFlush(purchases);
+    }
+
+    @RequestMapping(value="/goodsFilter", method=RequestMethod.GET)
+    @ResponseBody
+    public List<Goods> goodsFilter(@RequestParam String letter) {
+        System.out.println("letter: " + letter);
+        goodsRepo.findByNameStartingWith("К").forEach(product -> System.out.println(product.getName()));
+        return goodsRepo.findByNameStartingWith(letter);
     }
 
 }

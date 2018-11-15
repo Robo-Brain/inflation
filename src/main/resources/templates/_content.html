@@ -1,29 +1,43 @@
-<th:block sec:authorize="isAuthenticated()">
-    <div style="display: none" id="add">
-        <form>
-            <fieldset>
-                    <label for="name">Name: </label>
-                    <input type="text" id="name">
-            </fieldset>
-        </form>
-    </div>
+<div id="wrap"></div>
 
-    <div id="goods">
-        <th:block th:each="product : ${goods}">
-            <div class="product">
-                <input class="price" th:id="${product.getId()}" type="number" />
-                <label th:text="${product.getName()}"></label>
-            </div>
-        </th:block>
-    </div>
 
-    <div class="addProduct">
-        <div class="add">+</div>
-        <div class="productForm">
-            <input id="productName" type="search" />
-            <a id="submitNewProduct" href="#">✓ </a>
-            <a class="cancelNewProduct" id="cancelNewProduct" href="#"> ×</a>
+<div class="logoAndName">
+    <img width="36px" height="36px" th:src="${user.getUserpic()}" /> &nbsp;
+    <span class="top">
+        <span th:text="${user.getName()}">Anonymous</span>,
+    </span>
+</div>
+
+
+<div class="logoAndName shopSelect">
+    <select id="shops" th:field="*{shops}">
+        <option th:each="shop : ${shops}" th:value="${shop.getId()}" th:text="${shop.getName()}"></option>
+        <option class="addShopOption" value="0"> - добавить - </option>
+    </select>
+</div>
+
+<div id="filter"></div>
+
+<div id="goods">
+    <th:block th:each="product : ${goods}">
+        <div class="product">
+            <input class="price" th:id="${product.getId()}" type="number" />
+            <label th:text="${product.getName()}"></label>
         </div>
-    </div>
+    </th:block>
+</div>
 
-</th:block>
+
+<div class="addProduct">
+    <div class="add">+</div>
+    <div class="productForm">
+        <input id="productName" type="search" />
+        <span class="submitNewProduct" id="submitNewProduct"> +</span>
+    </div>
+</div>
+
+
+<div class="addShop">
+    <button id="submitNewShop">✔</button>
+    <input id="newShopName" type="search" placeholder="Название магазина:" />
+</div>

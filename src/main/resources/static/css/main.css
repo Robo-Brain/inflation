@@ -56,16 +56,29 @@ input {
     display: none;
 }
 
+#filter {
+    width: 98%;
+    margin: 0 0 0.4em 1%;
+    font-size: 1.7em;
+    opacity: 0.5;
+    text-align: center;
+    letter-spacing: 0.7em;
+    line-height: 2em;
+}
+#filter span{
+    display: inline-block;
+    vertical-align: middle;
+}
+
 .logoAndName {
-    display: flex;
+    display: inline-block;
     align-items:center;
-    float: left;
     width: 49%;
     height: 4.5em;
-    margin-bottom: 1em;
+    margin-bottom: 0.3em;
 }
 .shopSelect {
-    display: block;
+    display: inline-block;
     text-align: right;
 }
 #shops {
@@ -77,11 +90,11 @@ input {
     color: #FF0000;
 }
 .addShop {
-    width: 90%;
+    width: 80%;
     font-size: 1.5em;
     margin-top: 1em;
     position: fixed;
-    top:80%;
+    top: 75%;
     left: -100%;
     z-index: 4;
     -webkit-transition: all 0.5s ease-out;
@@ -90,7 +103,8 @@ input {
     transition: all 0.5s ease-out;
 }
 .showShopForm {
-     left: 5% !important;
+    left: 10% !important;
+    position: absolute;
     -webkit-transition: all 0.5s ease-in;
     -moz-transition: all 0.5s ease-in;
     -o-transition: all 0.5s ease-in;
@@ -98,6 +112,15 @@ input {
  }
 .addShop input {
     width: 100%;
+    font-size: 1.5em;
+    padding: 0.1em 0.1em 0.1em 1.5em;
+}
+.addShop button {
+    position: absolute;
+    margin: 0 0 0 0.1em;
+    background: transparent;
+    border: none;
+    color: #7cdd77;
     font-size: 1.5em;
 }
 
@@ -117,7 +140,7 @@ input {
     display: inline-block;
     vertical-align: middle;
     width: 72%;
-    margin-right: 2%;
+    margin-left: 2%;
     font-size: 1.2em;
 }
 .product input{
@@ -160,8 +183,8 @@ input {
 }
 .showProductForm {
     opacity: 1;
-    left: 4%;
-    width: 92%;
+    left: 3%;
+    width: 94%;
     border-radius: 5em;
     bottom: 3%;
     z-index: 4;
@@ -171,24 +194,22 @@ input {
 }
 .showProductForm input{
     display: inline-block;
-    width: 60%;
-    margin : 0.4em 0.6em;
+    width: 80%;
+    margin : 0.4em 0 0.4em 0.6em;
     font-size: 1.6em;
     line-height: 1.9em;
     padding: 0.1em 1em 0.1em 1em;
     border-radius: 1em;
 }
-.showProductForm a{
+.submitNewProduct {
     display: inline-block;
     width: 5%;
-    margin : 0 0.4em 0 1.1em;
-    font-size: 1.4em;
+    margin : 0.5em 0 0 0.7em;
+    font-size: 2em;
     color: #fff;
     text-decoration: none;
 }
-.cancelNewProduct {
-    font-size: 1.8em !important;
-}
+
 /*#productName::-webkit-search-cancel-button{*/
     /*position:relative;*/
     /*right:0px;*/

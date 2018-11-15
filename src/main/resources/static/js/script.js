@@ -1,51 +1,32 @@
 function addShop() {
-    $("#add").dialog({
-        classes: {
-            "ui-dialog": "ui-dialogMobile"
-        },
-        resizable: false,
-        height: "auto",
-        width: 400,
-        modal: true,
-        buttons: {
-            "Add": function() {
-                $( this ).dialog('close');
+    var name = $('#newShopName').val();
 
-                var name = $('#addName').val();
-
-                if(!!name || name.replace(/[^a-zA-Z0-9]/g, '').length > 2 || name != '')
-                    $.post("/addShop?name=" + name)
-                        .done(function () {
-                            new Noty({
-                                type: 'success',
-                                theme: 'metroui',
-                                text: 'Магазин успешно добавлен.',
-                                timeout: 5000
-                            }).show();
-                        })
-                        .fail(function () {
-                            new Noty({
-                                type: 'error',
-                                theme: 'metroui',
-                                text: 'Ошибка. Не удалось добавить магазин.',
-                                timeout: 5000
-                            }).show();
-                        });
-                else {
-                    new Noty({
-                        type: 'error',
-                        theme: 'metroui',
-                        text: 'Ошибка. Укажите название магазина.',
-                        timeout: 5000
-                    }).show();
-
-                }
-            },
-            Cancel: function() {
-                $(this).dialog('close');
-            }
-        }
-    });
+    if (!!name || name.replace(/[^a-zA-Z0-9]/g, '').length > 2 || name != '')
+        $.post("/addShop?name=" + name)
+            .done(function () {
+                new Noty({
+                    type: 'success',
+                    theme: 'metroui',
+                    text: 'Магазин успешно добавлен.',
+                    timeout: 5000
+                }).show();
+            })
+            .fail(function () {
+                new Noty({
+                    type: 'error',
+                    theme: 'metroui',
+                    text: 'Ошибка. Не удалось добавить магазин.',
+                    timeout: 5000
+                }).show();
+            });
+    else {
+        new Noty({
+            type: 'error',
+            theme: 'metroui',
+            text: 'Ошибка. Укажите название магазина.',
+            timeout: 5000
+        }).show();
+    }
 }
 
 function changeShop(id) {
@@ -84,16 +65,17 @@ function savePrice(shopId, productId, price) {
 
 function showAddProductForm(e) {
     var cls = $(e.target).attr('class');
-    if (cls == 'addProduct' || cls == 'cancelNewProduct'){
+    if (cls == 'addProduct'){
         $('#wrap').toggle();
         $('.addProduct').toggleClass("showProductForm");
+        $('.add').toggle();
     } else if(cls == 'add') {
         $('#wrap').show();
         $('.addProduct').addClass("showProductForm");
+        $('.add').toggle();
     }
     $('.addShopInput').hide();
     $('#shops').show().val(userSettings.shopId);
-    $('.add').toggle();
 }
 function submitNewProduct() {
     var name = $('#productName').val();
@@ -134,6 +116,25 @@ function wrapClose() {
     $('.addProduct').removeClass("showProductForm");
     $('.addShop').removeClass("showShopForm");
     $('.add').show();
+}
+
+function filter(letter) {
+    $.ajax({
+        type : "GET",
+        url : "/goodsFilter?letter=" + letter,
+        success: function(data){
+            $('.product').hide();
+            data.forEach(function (item) {
+                $('#goods').append(
+                    "<div class='product'>"
+                    + "<input class='price' type='number' />"
+                    + "<label>"
+                    + item.name
+                    + "</label></div>"
+                )
+            })
+        }
+    });
 }
 
 $(function() {});

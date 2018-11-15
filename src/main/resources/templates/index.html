@@ -13,27 +13,9 @@
     </th:block>
 
     <th:block sec:authorize="isAuthenticated()">
-        <div id="wrap"></div>
 
-        <div class="logoAndName">
-            <img width="36px" height="36px" th:src="${user.getUserpic()}" /> &nbsp;
-            <span class="top">
-                <span th:text="${user.getName()}">Anonymous</span>,
-            </span>
-        </div>
-
-        <div class="logoAndName shopSelect">
-            <select id="shops" th:field="*{shops}">
-                <option th:each="shop : ${shops}" th:value="${shop.getId()}" th:text="${shop.getName()}"></option>
-                <option class="addShopOption" value="0">Add the shop</option>
-            </select>
-        </div>
 
         <th:block th:include="_content"></th:block>
-
-        <div class="addShop">
-            <input type="search" placeholder="Название магазина:" />
-        </div>
 
 
     </th:block>
@@ -45,10 +27,33 @@
         goods = /*[[${goods}]]*/ "";
 
         var productList = [];
-        goods.forEach(function (value) { productList.push(value.name) });
+        var productMask = [];
+        goods.forEach(function (value) {
+            productList.push(value.name);
+            var letter = value.name.substring(0, 1);
+            if (jQuery.inArray(letter, productMask) < 0) {
+                productMask.push(letter)
+            }
+        });
+
+        productMask.forEach(function (value) {
+            $('#filter').append(
+                '<span title="' + value + '"> '
+                + value
+                + ' </span>'
+            )
+        });
+
+        $('#filter span').click(function () {
+            filter($(this).attr('title'));
+        });
 
         $('#wrap').click(function () {
             wrapClose();
+        });
+
+        $('#submitNewShop').click(function () {
+            addShop();
         });
 
         $('#shops option').filter(function() {
