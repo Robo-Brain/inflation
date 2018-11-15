@@ -3,7 +3,6 @@ package com.robo.repository;
 import com.robo.Entities.Goods;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,9 +14,9 @@ public interface GoodsRepo extends JpaRepository<Goods, Integer> {
     @Query("SELECT g FROM Goods g ORDER BY g.name ASC")
     List<Goods> findAllOrderByNameAsc();
 
-//    List<Goods> findByNameStartingWith(String letter);
+    List<Goods> findByNameStartingWith(String letter);
 
-    @Query("SELECT g FROM Goods AS g WHERE LOWER(g.name) LIKE 'к%'")
-    List<Goods> findByNameStartingWith(@Param("letter") String letter);
+//    @Query("SELECT g FROM Goods AS g WHERE g.name LIKE :letter%")
+//    List<Goods> findByNameStartingWith(@Param("letter") String letter);
 
 }
