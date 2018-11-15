@@ -48,6 +48,8 @@ public class MainController {
 
             model.addAttribute("shops", shopsRepo.findAll());
             model.addAttribute("goods", goodsRepo.findAllOrderByNameAsc());
+            
+            model.addAttribute("qw", shopsRepo.findByNameStartingWith("Кировский"));
         }
     }
 
