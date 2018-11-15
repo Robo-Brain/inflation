@@ -49,7 +49,7 @@ public class MainController {
             model.addAttribute("shops", shopsRepo.findAll());
             model.addAttribute("goods", goodsRepo.findAllOrderByNameAsc());
             
-            model.addAttribute("qwe", goodsRepo.findByNameContainingIgnoreCase("К"));
+            model.addAttribute("qwe", goodsRepo.findByNameContainingIgnoreCase());
         }
     }
 
