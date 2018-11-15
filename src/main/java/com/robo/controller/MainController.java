@@ -28,8 +28,6 @@ public class MainController {
     @Autowired
     UserSettingsRepo userSettingsRepo;
     @Autowired
-    UserDetailsRepo userDetailsRepo;
-    @Autowired
     PurchasesRepo purchasesRepo;
 
     private ThreadLocal<User> userSession = new ThreadLocal<>();
@@ -50,8 +48,6 @@ public class MainController {
 
             model.addAttribute("shops", shopsRepo.findAll());
             model.addAttribute("goods", goodsRepo.findAllOrderByNameAsc());
-            
-            model.addAttribute("us", userDetailsRepo.findByNameStartingWith());
         }
     }
 
