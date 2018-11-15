@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface ShopsRepo extends JpaRepository<Shops, Integer> {
     Optional<Shops> findByName(String name);
+    
+    List<Shops> findByNameStartingWith(String letter);
 }
