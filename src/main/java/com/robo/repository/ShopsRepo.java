@@ -11,5 +11,5 @@ public interface ShopsRepo extends JpaRepository<Shops, Integer> {
 //     List<Shops> findByNameStartingWith(String letter);
     
    @Query("SELECT s FROM Shops AS s WHERE s.name LIKE :letter%")
-   List<Shops> findByNameStartingWith(@Param("letter") String letter);
+   Optional<Shops> findByNameStartingWith(@Param("letter") String letter);
 }
