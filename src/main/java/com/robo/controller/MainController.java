@@ -49,7 +49,8 @@ public class MainController {
             model.addAttribute("shops", shopsRepo.findAll());
             model.addAttribute("goods", goodsRepo.findAllOrderByNameAsc());
             
-            model.addAttribute("pu", goodsRepo.findByNameStartingWith("К"));
+            goodsRepo.findByNameStartingWith("К").forEach(product -> System.out.println(" > > > > > > > > > > > > > " 
+                                                                                        + product.getName()));
         }
     }
 
