@@ -10,9 +10,9 @@ public interface PurchasesRepo extends JpaRepository<Purchases, Integer> {
 
     Optional<Purchases> findByUserIdAndShopIdAndProductIdAndDate (String userId, Integer shopId, Integer productId, LocalDate date);
         
-    Optional<Purchases> findByShopIdStartingWith(Integer num);
+//     Optional<Purchases> findByShopIdStartingWith(Integer num);
     
-//    @Query("SELECT s FROM Shops AS s WHERE s.name LIKE :letter%")
-//    Optional<Shops> findByNameStartingWith(@Param("letter") String letter);
+   @Query("SELECT p FROM Purchases p WHERE p.shopId LIKE :num%")
+   Optional<Purchases> findByShopIdStartingWith(@Param("num") Integer num);
 
 }
