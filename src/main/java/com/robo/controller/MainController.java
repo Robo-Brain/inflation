@@ -49,8 +49,7 @@ public class MainController {
             model.addAttribute("shops", shopsRepo.findAll());
             model.addAttribute("goods", goodsRepo.findAllOrderByNameAsc());
             
-            goodsRepo.findByUsernameContainingIgnoreCase("К").forEach(product -> System.out.println(" > > > > > > > > > > > > > " 
-                                                                                        + product.getName()));
+            model.addAttribute("qwe", goodsRepo.findByNameContainingIgnoreCase("К"));
         }
     }
 
