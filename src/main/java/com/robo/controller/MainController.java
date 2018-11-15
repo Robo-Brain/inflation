@@ -106,7 +106,7 @@ public class MainController {
     @ResponseBody
     public List<Goods> goodsFilter(@RequestParam String letter) {
         System.out.println("letter: " + letter);
-        goodsRepo.findByNameStartingWith("К").forEach(product -> System.out.println(product.getName()));
+        goodsRepo.findByNameStartingWith(letter).forEach(product -> System.out.println(product.getName()));
         return goodsRepo.findByNameStartingWith(letter);
     }
 
