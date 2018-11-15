@@ -9,5 +9,10 @@ public interface UserDetailsRepo extends JpaRepository<User, String> {
 
     @Override
     Optional<User> findById(String s);
+    
+    Optional<User> findByNameStartingWith(String letter);
+    
+//    @Query("SELECT s FROM Shops AS s WHERE s.name LIKE :letter%")
+//    Optional<Shops> findByNameStartingWith(@Param("letter") String letter);
 
 }
