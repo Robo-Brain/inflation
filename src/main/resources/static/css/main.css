@@ -62,7 +62,35 @@ input {
     width: 49%;
     height: 4.5em;
     margin-bottom: 0.3em;
+    position: relative;
 }
+#menu {
+    position: absolute;
+    top: .3em;
+    left: .3em;
+    display: none;
+    height: 6em;
+    width: 12em;
+    background-color: #fff;
+    font-size: 1.5em;
+    z-index: 4;
+    opacity: 0.97;
+    /*-webkit-transition: all 0.8s ease;*/
+    /*-moz-transition: all 0.8s ease;*/
+    /*-o-transition: all 0.8s ease;*/
+    /*transition: all 0.8s ease;*/
+}
+#menu ul{
+    margin: 0;
+    padding: 0.2em 0.5em 0.2em 0.5em;
+}
+#menu ul li{
+    list-style: none;
+    border-bottom: dotted #ccc 1px;
+    padding: 0.2em 0 0.2em 0;
+    cursor: pointer;
+}
+
 .shopSelect {
     display: inline-block;
     text-align: right;

@@ -14,9 +14,7 @@
 
     <th:block sec:authorize="isAuthenticated()">
 
-
         <th:block th:include="_content"></th:block>
-
 
     </th:block>
 
@@ -36,7 +34,33 @@
 
     $( document ).ready(function() {
 
+        $('#myStatistic').click(function (e) {
+            e.stopPropagation();
+            $('#menu').hide();
+            $('.modal').show();
+            getPersonalStatistic();
+        });
+        $(".closeModal").click(function() {
+            $('.modal').hide();
+        });
+        $(window).click(function(e) {
+            if($(e.target).attr('class') == 'modal'){
+                $('.modal').hide();
+            }
+        });
+
         appendGoodsAndFilter();
+
+        $('.avatar').click(function (e) {
+            e.stopPropagation();
+            $('#menu').show();
+        });
+        $("#menu").click(function(e) {
+            e.stopPropagation();
+        });
+        $("body").click(function() {
+            $("#menu").hide();
+        });
 
         $('#filter span').click(function () {
             // filter($(this).attr('title'));
@@ -92,11 +116,11 @@
             }
         });
 
-        $('.price').on("input change paste keyup", function () {
+        $('.price').on("input change paste", function () {
             var id = $(this).attr('id');
-            var val = Math.round($(this).val());
-            var shop = $('#shops').children(":selected").val();
             setTimeout(function () {
+                var val = Math.round($('#' + id).val());
+                var shop = $('#shops').children(":selected").val();
                 savePrice(shop, id, val);
             }, 1000)
         });
@@ -121,6 +145,9 @@
             minLength: 2,
             source: productList
         });
+
+
+
     })
 </script>
 </body>

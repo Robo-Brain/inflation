@@ -4,6 +4,9 @@ function addShop() {
     if (!!name || name.replace(/[^a-zA-Z0-9]/g, '').length > 2 || name != '')
         $.post("/addShop?name=" + name)
             .done(function () {
+                setTimeout(function() {
+                    location.reload();
+                }, 4000);
                 new Noty({
                     type: 'success',
                     theme: 'metroui',
@@ -30,7 +33,6 @@ function addShop() {
 }
 
 function changeShop(id) {
-    console.log(shops);
     $.post("/setDefaultShop?id=" + id)
         .done(function () {
             new Noty({
@@ -148,6 +150,29 @@ function filter(letter) {
                     + "<label>"
                     + item.name
                     + "</label></div>"
+                )
+            })
+        }
+    });
+}
+
+function getPersonalStatistic() {
+    $.ajax({
+        type : "GET",
+        url : "/personalStatistic",
+        success: function(data){
+            console.log(data);
+            data.forEach(function (item) {
+                $('.modal-body').append(
+                    "<div>"
+                    + item.shopName
+                    + " / "
+                    + item.productName
+                    + " = "
+                    + item.price
+                    + "p. / "
+                    + item.purchaseDate
+                    + "</div>"
                 )
             })
         }

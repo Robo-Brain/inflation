@@ -1,6 +1,7 @@
 package com.robo.controller;
 
 import com.robo.Entities.*;
+import com.robo.Model.PersonalStatistic;
 import com.robo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -11,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -65,15 +68,17 @@ public class MainController {
     public void setDefShop(@RequestParam("id") Integer id) {
         UserSettings userSettings = userSettingsSession.get();
         userSettings.setShopId(id);
-        userSettingsRepo.saveAndFlush(userSettings);
+        userSettingsRepo.save(userSettings);
     }
 
     @PostMapping("/addShop")
     @ResponseBody
     public void addShop(@RequestParam("name") String name) {
-
         shopsRepo.findByName(name).orElseGet(() -> shopsRepo.save(new Shops(name)));
 
+        UserSettings userSettings = userSettingsSession.get();
+        userSettings.setShopId(shopsRepo.findByName(name).get().getId());
+        userSettingsRepo.save(userSettings);
     }
 
     @PostMapping("/addProduct")
@@ -90,22 +95,59 @@ public class MainController {
         Integer price = Integer.parseInt(requestParams.get("price"));
         LocalDate date = LocalDate.now();
 
-        Purchases purchases = purchasesRepo.findByUserIdAndShopIdAndProductIdAndDate(
+        Purchases purchases = purchasesRepo.findAllByUserIdAndShopIdAndProductIdAndDate(
                 userId,
                 shopId,
                 productId,
-                date)
-                .orElseGet(() -> purchasesRepo.saveAndFlush(new Purchases(
-                        userId,
-                        shopId,
-                        productId,
-                        price,
-                        date
-                )));
+                date).orElseGet(Purchases::new);
+
+        purchases.setUserId(userId);
+        purchases.setShopId(shopId);
+        purchases.setProductId(productId);
         purchases.setPrice(price);
+        purchases.setDate(date);
         purchasesRepo.saveAndFlush(purchases);
+
     }
 
+    @GetMapping("/personalStatistic")
+    @ResponseBody
+    public List<PersonalStatistic> personalStatistic() {
+
+        String userId = userSettingsSession.get().getUserId();
+
+        List<Purchases> purchases = purchasesRepo.findAllByUserId(userId);
+
+        List<PersonalStatistic> personalStatisticList = new ArrayList<>();
+
+        purchases.forEach(purchase -> {
+
+        Integer shopId = purchase.getShopId();
+        String shopName = shopsRepo.findById(shopId).get().getName();
+
+        Integer productId = purchase.getProductId();
+        String productName = goodsRepo.findById(productId).get().getName();
+
+        Integer price = purchase.getPrice();
+
+        LocalDate date = purchase.getDate();
+
+        PersonalStatistic personalStatistic = new PersonalStatistic(
+                shopId,
+                shopName,
+                productId,
+                productName,
+                price,
+                date
+        );
+
+        personalStatisticList.add(personalStatistic);
+
+        });
+
+        return personalStatisticList;
+
+    }
 //     @RequestMapping(value="/goodsFilter", method=RequestMethod.GET)
 //     @ResponseBody
 //     public List<Goods> goodsFilter(@RequestParam String letter) {
