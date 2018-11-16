@@ -90,6 +90,7 @@ input {
 }
 .showShopForm {
     left: 10% !important;
+    min-width: 800px;
     position: absolute;
     -webkit-transition: all 0.5s ease-in;
     -moz-transition: all 0.5s ease-in;
@@ -120,7 +121,6 @@ input {
     margin: 0 0 0.4em 0;
     font-size: 2em;
     text-align: center;
-    /*letter-spacing: 1em;*/
     line-height: 2em;
 }
 #filter span{
