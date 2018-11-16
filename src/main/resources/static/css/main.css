@@ -116,10 +116,9 @@ input {
 }
 
 #filter {
-    width: 98%;
-    margin: 0 0 0.4em 1%;
-    font-size: 3em;
-    opacity: 0.5;
+    width: 100%;
+    margin: 0 0 0.4em 0;
+    font-size: 2em;
     text-align: center;
     /*letter-spacing: 1em;*/
     line-height: 2em;
@@ -129,6 +128,10 @@ input {
     vertical-align: middle;
     cursor: pointer;
     padding: 0 0.5em 0 0.5em;
+    opacity: 0.5;
+}
+#filter span:hover {
+    opacity: 1 !important;
 }
 #filter .cancelFilter{
     color: red;

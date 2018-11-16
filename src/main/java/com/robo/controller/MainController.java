@@ -47,6 +47,11 @@ public class MainController {
             model.addAttribute("shops", shopsRepo.findAll());
             model.addAttribute("goods", goodsRepo.findAllOrderByNameAsc());
 
+            model.addAttribute("qwe", goodsRepo.findByName("Banana"));
+            model.addAttribute("qwe1", goodsRepo.findByIdQuery(7));
+            model.addAttribute("qwe2", goodsRepo.findByNameQuery("Бананы, 1кг"));
+            model.addAttribute("qwe3", userDetailsRepo.findByName("Pavel Svechkov"));
+
         }
     }
 
