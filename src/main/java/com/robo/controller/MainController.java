@@ -49,6 +49,8 @@ public class MainController {
             model.addAttribute("goods", goodsRepo.findAllOrderByNameAsc());
 
             model.addAttribute("qwe", goodsRepo.findByName("Бананы, 1кг"));
+            model.addAttribute("qwe1", goodsRepo.findByIdQuery(7));
+            model.addAttribute("qwe2", goodsRepo.findByNameQuery("Бананы, 1кг"));
 
         }
     }
