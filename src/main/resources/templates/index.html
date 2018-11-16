@@ -21,49 +21,44 @@
     </th:block>
 
 
-    <script th:inline="javascript">
-        shops = /*[[${shops}]]*/ "";
-        userSettings = /*[[${userSettings}]]*/ "";
-        goods = /*[[${goods}]]*/ "";
-        
-        qwe = /*[[${qwe}]]*/ "";
-        qwe1 = /*[[${qwe1}]]*/ "";
-        qwe2 = /*[[${qwe2}]]*/ "";
-        qwe3 = /*[[${qwe3}]]*/ "";
+<script th:inline="javascript">
+    shops = /*[[${shops}]]*/ "";
+    userSettings = /*[[${userSettings}]]*/ "";
+    goods = /*[[${goods}]]*/ "";
 
-        var productList = [];
-        var productMask = [];
-        goods.forEach(function (value) {
-            productList.push(value.name);
-            var letter = value.name.substring(0, 1);
-            if (jQuery.inArray(letter, productMask) < 0) {
-                productMask.push(letter)
-            }
-        });
+    productList = [];
+    productMask = [];
 
-        productMask.forEach(function (value) {
-            $('#filter').append(
-                '<span title="' + value + '"> '
-                + value
-                + ' </span>'
-            )
-        });
+    $( document ).ready(function() {
+
+        appendGoodsAndFilter();
 
         $('#filter span').click(function () {
             // filter($(this).attr('title'));
+            $('.cancelFilter').remove();
+
             $('.product').hide();
             var letter = $(this).attr('title');
             goods.forEach(function (value) {
                 if (value.name.substring(0, 1) == letter) {
                     $('#goods').append(
-                        "<div class='product'>"
+                        "<div class='productF'>"
                         + "<input class='price' type='number' id='" + value.id + "' />"
                         + "<label>"
                         + value.name
                         + "</label></div>"
-                    )
+                    );
                 }
-            })
+            });
+            $('#filter').append(
+                '<span class="cancelFilter" title="cancel"> x </span>'
+            )
+        });
+
+        $(document).on('click', 'span.cancelFilter', function() {
+            $('.cancelFilter').remove();
+            $('.productF').remove();
+            $('.product').show();
         });
 
         $('#wrap').click(function () {
@@ -74,13 +69,13 @@
             addShop();
         });
 
-        $('#shops option').filter(function() {
+        $('#shops option').filter(function () {
             return $(this).val() == userSettings.shopId;
         }).prop('selected', true);
 
-        $('#shops').on('change', function() {
+        $('#shops').on('change', function () {
             var id = $(this).children(":selected").attr("value");
-            if(id != 0) {
+            if (id != 0) {
                 changeShop(id);
             } else {
                 $('.addShop').addClass("showShopForm");
@@ -90,7 +85,7 @@
             }
         });
 
-        $('.price').on("input change paste keyup", function() {
+        $('.price').on("input change paste keyup", function () {
             var id = $(this).attr('id');
             var val = Math.round($(this).val());
             var shop = $('#shops').children(":selected").val();
@@ -112,14 +107,14 @@
         });
 
         $("#productName").autocomplete({
-            position: { my : "center bottom", at: "left top" },
+            position: {my: "center bottom", at: "left top"},
             classes: {
                 "ui-autocomplete": "productAutocomplete"
             },
             minLength: 2,
             source: productList
         });
-
-    </script>
+    })
+</script>
 </body>
 </html>

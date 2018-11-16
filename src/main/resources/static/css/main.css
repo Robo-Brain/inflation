@@ -68,6 +68,10 @@ input {
 #filter span{
     display: inline-block;
     vertical-align: middle;
+    cursor: pointer;
+}
+#filter .cancelFilter{
+    color: red;
 }
 
 .logoAndName {
@@ -132,18 +136,18 @@ input {
 #goods {
     clear: left;
 }
-.product{
+.product, .productF {
     margin-bottom: 1.4em;
     height: 2.2em;
 }
-.product label{
+.product label, .productF label{
     display: inline-block;
     vertical-align: middle;
     width: 72%;
     margin-left: 2%;
     font-size: 1.2em;
 }
-.product input{
+.product input, .productF input{
     display: inline-block;
     vertical-align: middle;
     line-height: 1.6em;

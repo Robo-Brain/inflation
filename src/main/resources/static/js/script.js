@@ -50,6 +50,24 @@ function changeShop(id) {
         })
 }
 
+function appendGoodsAndFilter() {
+    goods.forEach(function (value) {
+        productList.push(value.name);
+        var letter = value.name.substring(0, 1);
+        if (jQuery.inArray(letter, productMask) < 0) {
+            productMask.push(letter)
+        }
+    });
+
+    productMask.forEach(function (value) {
+        $('#filter').append(
+            '<span title="' + value + '"> '
+            + value
+            + ' </span>'
+        )
+    });
+}
+
 function savePrice(shopId, productId, price) {
     $.ajax({
         url: '/savePrice',
@@ -122,7 +140,7 @@ function filter(letter) {
         type : "GET",
         url : "/goodsFilter?letter=" + letter,
         success: function(data){
-            $('.product').hide();
+            $('.product').remove();
             data.forEach(function (item) {
                 $('#goods').append(
                     "<div class='product'>"
