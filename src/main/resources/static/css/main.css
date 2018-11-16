@@ -90,7 +90,7 @@ input {
 }
 .showShopForm {
     left: 10% !important;
-    min-width: 500px;
+    min-width: 450px;
     position: absolute;
     -webkit-transition: all 0.5s ease-in;
     -moz-transition: all 0.5s ease-in;
