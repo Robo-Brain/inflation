@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface GoodsRepo extends JpaRepository<Goods, Integer> {
+public interface GoodsRepo extends JpaRepository<Goods, String> {
 
     List<Goods> findByName(String name);
 
