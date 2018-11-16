@@ -1,10 +1,7 @@
 package com.robo.controller;
 
 import com.robo.Entities.*;
-import com.robo.repository.GoodsRepo;
-import com.robo.repository.PurchasesRepo;
-import com.robo.repository.ShopsRepo;
-import com.robo.repository.UserSettingsRepo;
+import com.robo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -28,6 +25,8 @@ public class MainController {
     UserSettingsRepo userSettingsRepo;
     @Autowired
     PurchasesRepo purchasesRepo;
+    @Autowired
+    UserDetailsRepo userDetailsRepo;
 
     private ThreadLocal<User> userSession = new ThreadLocal<>();
     private ThreadLocal<UserSettings> userSettingsSession = new ThreadLocal<>();
@@ -51,6 +50,7 @@ public class MainController {
             model.addAttribute("qwe", goodsRepo.findByName("Бананы, 1кг"));
             model.addAttribute("qwe1", goodsRepo.findByIdQuery(7));
             model.addAttribute("qwe2", goodsRepo.findByNameQuery("Бананы, 1кг"));
+            model.addAttribute("qwe3", userDetailsRepo.findByName("Pavel Svechkov"));
 
         }
     }

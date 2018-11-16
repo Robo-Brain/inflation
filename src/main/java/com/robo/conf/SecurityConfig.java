@@ -103,6 +103,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         return map -> {
             String id = (String) map.get("sub");
+            System.out.println(" > > > >  > > >>>>>>>>> NAME! : " + map.get("name"));
             User user = userDetailsRepo.findById(id).orElseGet(() -> new User(
                     id,
                     (String) map.get("name"),

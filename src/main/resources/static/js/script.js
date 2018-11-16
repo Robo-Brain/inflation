@@ -51,7 +51,6 @@ function changeShop(id) {
 }
 
 function savePrice(shopId, productId, price) {
-    console.log(shopId, productId, price);
     $.ajax({
         url: '/savePrice',
         type: 'POST',
@@ -127,7 +126,7 @@ function filter(letter) {
             data.forEach(function (item) {
                 $('#goods').append(
                     "<div class='product'>"
-                    + "<input class='price' type='number' />"
+                    + "<input class='price' type='number' id='" + item.id + "' />"
                     + "<label>"
                     + item.name
                     + "</label></div>"

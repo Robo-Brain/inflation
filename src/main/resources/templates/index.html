@@ -29,6 +29,7 @@
         qwe = /*[[${qwe}]]*/ "";
         qwe1 = /*[[${qwe1}]]*/ "";
         qwe2 = /*[[${qwe2}]]*/ "";
+        qwe3 = /*[[${qwe3}]]*/ "";
 
         var productList = [];
         var productMask = [];
@@ -49,7 +50,20 @@
         });
 
         $('#filter span').click(function () {
-            filter($(this).attr('title'));
+            // filter($(this).attr('title'));
+            $('.product').hide();
+            var letter = $(this).attr('title');
+            goods.forEach(function (value) {
+                if (value.name.substring(0, 1) == letter) {
+                    $('#goods').append(
+                        "<div class='product'>"
+                        + "<input class='price' type='number' id='" + value.id + "' />"
+                        + "<label>"
+                        + value.name
+                        + "</label></div>"
+                    )
+                }
+            })
         });
 
         $('#wrap').click(function () {
