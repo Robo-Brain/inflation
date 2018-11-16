@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -48,8 +47,9 @@ public class MainController {
 
             model.addAttribute("shops", shopsRepo.findAll());
             model.addAttribute("goods", goodsRepo.findAllOrderByNameAsc());
-            
-            model.addAttribute("qwe", goodsRepo.findBlaBla("К"));
+
+            model.addAttribute("qwe", goodsRepo.findByName("Бананы, 1кг"));
+
         }
     }
 
