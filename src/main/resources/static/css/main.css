@@ -56,24 +56,6 @@ input {
     display: none;
 }
 
-#filter {
-    width: 98%;
-    margin: 0 0 0.4em 1%;
-    font-size: 1.7em;
-    opacity: 0.5;
-    text-align: center;
-    letter-spacing: 0.7em;
-    line-height: 2em;
-}
-#filter span{
-    display: inline-block;
-    vertical-align: middle;
-    cursor: pointer;
-}
-#filter .cancelFilter{
-    color: red;
-}
-
 .logoAndName {
     display: inline-block;
     align-items:center;
@@ -131,6 +113,25 @@ input {
 .top {
     clear: left;
     font-size: 1.5em;
+}
+
+#filter {
+    width: 98%;
+    margin: 0 0 0.4em 1%;
+    font-size: 3em;
+    opacity: 0.5;
+    text-align: center;
+    /*letter-spacing: 1em;*/
+    line-height: 2em;
+}
+#filter span{
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    padding: 0 0.5em 0 0.5em;
+}
+#filter .cancelFilter{
+    color: red;
 }
 
 #goods {

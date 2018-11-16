@@ -35,9 +35,11 @@
 
         $('#filter span').click(function () {
             // filter($(this).attr('title'));
-            $('.cancelFilter').remove();
 
+            $('.cancelFilter').remove();
+            $('.productF').remove();
             $('.product').hide();
+
             var letter = $(this).attr('title');
             goods.forEach(function (value) {
                 if (value.name.substring(0, 1) == letter) {
