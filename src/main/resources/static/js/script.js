@@ -78,11 +78,12 @@ function savePrice(shopId, productId, price) {
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
         success: function() {
             $('#' + productId).each(function(){
-                $(this).css('color', 'green');
-                $(this).fadeOut('slow', function(){
-                    $(this).val('');
+                // $(this).css('color', 'green');
+                $(this).fadeOut('fast', function(){
+                    // $(this).val('');
+                    $(this).css('color', 'green');
                     $(this).fadeIn('fast');
-                    $(this).css('color', 'black');
+                    // $(this).css('color', 'black');
                 });
             });
         },
@@ -202,5 +203,9 @@ function appendPersonalStatistic(data) {
         )
     })
 }
+
+$(function() {
+
+});
 
 $(function() {});

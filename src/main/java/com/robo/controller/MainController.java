@@ -35,7 +35,7 @@ public class MainController {
     private ThreadLocal<UserSettings> userSettingsSession = new ThreadLocal<>();
 
     @ModelAttribute
-    public void models(Model model, @AuthenticationPrincipal User user) throws Exception {
+    public void models(Model model, @AuthenticationPrincipal User user) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -44,7 +44,7 @@ public class MainController {
             userSession.set(user);
             model.addAttribute("user", userSession.get());
 
-            userSettingsSession.set(userSettingsRepo.findByUserId(user.getId()).orElseThrow(Exception::new));
+            userSettingsSession.set(userSettingsRepo.findByUserId(user.getId()).orElseGet(() -> userSettingsRepo.save(new UserSettings(user.getId()))));
             model.addAttribute("userSettings", userSettingsSession.get());
 
             model.addAttribute("shops", shopsRepo.findAll());
