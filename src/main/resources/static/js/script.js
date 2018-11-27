@@ -92,7 +92,7 @@ function savePrice(shopId, productId, price) {
                 });
             }
         });
-    }, 2000);
+    }, 1000);
 }
 
 function showAddProductForm(e) {
