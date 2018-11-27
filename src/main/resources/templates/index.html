@@ -115,7 +115,7 @@
         $('.price').on("input", function () {
             var id = $(this).attr('id');
             var val = Math.round($('#' + id).val());
-            if ($('#' + id).val().length > 1){
+            if ($('#' + id).val().length > 1 && $('#' + id).val().length < 4){
                 var shop = $('#shops').children(":selected").val();
                 savePrice(shop, id, val);
             }
