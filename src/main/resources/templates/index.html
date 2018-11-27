@@ -115,8 +115,10 @@
         $('.price').on("input", function () {
             var id = $(this).attr('id');
             var val = Math.round($('#' + id).val());
-            var shop = $('#shops').children(":selected").val();
-            savePrice(shop, id, val);
+            if ($('#' + id).val().length > 1){
+                var shop = $('#shops').children(":selected").val();
+                savePrice(shop, id, val);
+            }
         });
 
         $('.addProduct').click(function (e) {
