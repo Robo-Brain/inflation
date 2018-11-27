@@ -29,6 +29,8 @@
     productList = [];
     productMask = [];
 
+    timeout = null;
+
     $( document ).ready(function() {
 
         $('#myStatistic').click(function (e) {
@@ -112,13 +114,9 @@
 
         $('.price').on("input change paste", function () {
             var id = $(this).attr('id');
-            setTimeout(function () {
-                var val = Math.round($('#' + id).val());
-                var shop = $('#shops').children(":selected").val();
-                setTimeout(function () {
-                    savePrice(shop, id, val);
-                }, 2000)
-            }, 500)
+            var val = Math.round($('#' + id).val());
+            var shop = $('#shops').children(":selected").val();
+            savePrice(shop, id, val);
         });
 
         $('.addProduct').click(function (e) {

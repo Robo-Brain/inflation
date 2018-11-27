@@ -71,28 +71,28 @@ function appendGoodsAndFilter() {
 }
 
 function savePrice(shopId, productId, price) {
-    $.ajax({
-        url: '/savePrice',
-        type: 'POST',
-        data: jQuery.param({ shopId: shopId, productId: productId, price : price}) ,
-        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-        success: function() {
-            $('#' + productId).each(function(){
-                // $(this).css('color', 'green');
-                $(this).fadeOut('fast', function(){
-                    // $(this).val('');
-                    $(this).css('color', 'green');
-                    $(this).fadeIn('fast');
-                    // $(this).css('color', 'black');
+    clearTimeout(timeout);
+    timeout = setTimeout(function () {
+        $.ajax({
+            url: '/savePrice',
+            type: 'POST',
+            data: jQuery.param({ shopId: shopId, productId: productId, price : price}) ,
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function() {
+                $('#' + productId).each(function(){
+                    $(this).fadeOut('fast', function(){
+                        $(this).css('color', 'green');
+                        $(this).fadeIn('fast');
+                    });
                 });
-            });
-        },
-        error: function () {
-            $('#' + productId).each(function(){
-                $(this).css('color', 'red');
-            });
-        }
-    });
+            },
+            error: function () {
+                $('#' + productId).each(function(){
+                    $(this).css('color', 'red');
+                });
+            }
+        });
+    }, 2000);
 }
 
 function showAddProductForm(e) {
