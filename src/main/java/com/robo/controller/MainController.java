@@ -50,11 +50,6 @@ public class MainController {
             model.addAttribute("shops", shopsRepo.findAll());
             model.addAttribute("goods", goodsRepo.findAllOrderByNameAsc());
 
-            model.addAttribute("qwe", goodsRepo.findByName("Banana"));
-            model.addAttribute("qwe1", goodsRepo.findByIdQuery(7));
-            model.addAttribute("qwe2", goodsRepo.findByNameQuery("Бананы, 1кг"));
-            model.addAttribute("qwe3", userDetailsRepo.findByName("Pavel Svechkov"));
-
         }
     }
 
@@ -148,12 +143,10 @@ public class MainController {
         return personalStatisticList;
 
     }
-//     @RequestMapping(value="/goodsFilter", method=RequestMethod.GET)
-//     @ResponseBody
-//     public List<Goods> goodsFilter(@RequestParam String letter) {
-//         System.out.println("letter: " + letter);
-//         goodsRepo.findByNameStartingWith(letter).forEach(product -> System.out.println(product.getName()));
-//         return goodsRepo.findByNameStartingWith(letter);
-//     }
+     @RequestMapping(value="/goodsFilter", method=RequestMethod.GET)
+     @ResponseBody
+     public List<Goods> goodsFilter(@RequestParam String letter) {
+         return goodsRepo.findByNameStartingWith(letter);
+     }
 
 }

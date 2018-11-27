@@ -68,6 +68,7 @@ input {
     position: absolute;
     top: .3em;
     left: .3em;
+    left: .3em;
     display: none;
     height: 6em;
     width: 12em;
@@ -221,7 +222,7 @@ input {
     opacity: 1;
     left: 3%;
     width: 94%;
-    border-radius: 5em;
+    border-radius: 0 2.5em 2.5em 0 !important;
     bottom: 3%;
     z-index: 4;
 }
@@ -234,8 +235,8 @@ input {
     margin : 0.4em 0 0.4em 0.6em;
     font-size: 1.6em;
     line-height: 1.9em;
-    padding: 0.1em 1em 0.1em 1em;
-    border-radius: 1em;
+    padding: 0.2em;
+    /*border-radius: 1em;*/
 }
 .submitNewProduct {
     display: inline-block;

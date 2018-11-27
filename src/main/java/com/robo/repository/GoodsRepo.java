@@ -13,13 +13,11 @@ public interface GoodsRepo extends JpaRepository<Goods, Integer> {
 
     List<Goods> findAllById(String id);
 
-    @Query("SELECT g FROM Goods g where g.id = :id")
-    List<Goods> findByIdQuery(@Param("id") Integer id);
-
     @Query("SELECT g FROM Goods g where g.name = :name")
     List<Goods> findByNameQuery(@Param("name") String name);
 
     @Query("SELECT g FROM Goods g ORDER BY g.name ASC")
     List<Goods> findAllOrderByNameAsc();
 
+    List<Goods> findByNameStartingWith(String letter);
 }

@@ -25,9 +25,6 @@
     goods = /*[[${goods}]]*/ "";
 
     qwe = /*[[${qwe}]]*/ "";
-    qwe1 = /*[[${qwe1}]]*/ "";
-    qwe2 = /*[[${qwe2}]]*/ "";
-    qwe3 = /*[[${qwe3}]]*/ "";
 
     productList = [];
     productMask = [];
@@ -65,33 +62,28 @@
         });
 
         $('#filter span').click(function () {
-            // filter($(this).attr('title'));
-
             $('.cancelFilter').remove();
-            $('.productF').remove();
-            $('.product').hide();
-
             var letter = $(this).attr('title');
-            goods.forEach(function (value) {
-                if (value.name.substring(0, 1) == letter) {
+            filter(letter, function(callback){
+                $('#goods').empty();
+                callback.forEach(function (product) {
                     $('#goods').append(
-                        "<div class='productF'>"
-                        + "<input class='price' type='number' id='" + value.id + "' />"
+                        "<div class='product'>"
+                        + "<input class='price' type='number' id='" + product.id + "' />"
                         + "<label>"
-                        + value.name
+                        + product.name
                         + "</label></div>"
                     );
-                }
+                })
             });
+
             $('#filter').append(
                 '<span class="cancelFilter" title="cancel"> x </span>'
             )
         });
 
         $(document).on('click', 'span.cancelFilter', function() {
-            $('.cancelFilter').remove();
-            $('.productF').remove();
-            $('.product').show();
+            location.reload();
         });
 
         $('#wrap').click(function () {

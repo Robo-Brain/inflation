@@ -48,7 +48,7 @@
     color: white;
 }
 
-.modal-body {padding: 2px 16px;}
+.modal-body {padding: 0;}
 
 /*.modal-footer {*/
     /*padding: 2px 16px;*/
@@ -74,4 +74,51 @@
 @keyframes fadeIn {
     from {opacity: 0}
     to {opacity: 1}
+}
+
+.statisticHeader {
+    margin-bottom: 0.5em;
+}
+.statisticHeader div {
+    float: left;
+    height: 1.1em;
+    padding: 0.2em 0.3em;
+    border-bottom: solid gray 1px;
+}
+.statisticHeaderDate {
+    width: 15%;
+    border-right: solid gray 1px;
+}
+.statisticHeaderProduct {
+    width: 38%;
+    border-right: solid gray 1px;
+}
+.statisticHeaderPrice {
+    width: 10%;
+    border-right: solid gray 1px;
+}
+.statisticHeaderShop {
+    width: 28%;
+}
+
+.statisticBody div {
+    font-size: 0.8em;
+    float: left;
+    height: 1.1em;
+}
+.statisticDate {
+    width: 15%;
+    padding: 0.1em 0 0.1em 0.1em;
+}
+.statisticProduct {
+    width: 38%;
+    padding: 0.1em 0 0.1em 0.8em;
+}
+.statisticPrice {
+    width: 10%;
+    padding: 0.1em 0 0.1em 1em;
+}
+.statisticShop {
+    width: 28%;
+    padding: 0.1em 0 0.1em 1em;
 }

@@ -76,8 +76,20 @@ function savePrice(shopId, productId, price) {
         type: 'POST',
         data: jQuery.param({ shopId: shopId, productId: productId, price : price}) ,
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        success: function() {
+            $('#' + productId).each(function(){
+                $(this).css('color', 'green');
+                $(this).fadeOut('slow', function(){
+                    $(this).val('');
+                    $(this).fadeIn('fast');
+                    $(this).css('color', 'black');
+                });
+            });
+        },
         error: function () {
-            //Do Something
+            $('#' + productId).each(function(){
+                $(this).css('color', 'red');
+            });
         }
     });
 }
@@ -137,21 +149,12 @@ function wrapClose() {
     $('.add').show();
 }
 
-function filter(letter) {
+function filter(letter, callback) {
     $.ajax({
         type : "GET",
         url : "/goodsFilter?letter=" + letter,
         success: function(data){
-            $('.product').remove();
-            data.forEach(function (item) {
-                $('#goods').append(
-                    "<div class='product'>"
-                    + "<input class='price' type='number' id='" + item.id + "' />"
-                    + "<label>"
-                    + item.name
-                    + "</label></div>"
-                )
-            })
+            callback(data);
         }
     });
 }
@@ -161,22 +164,43 @@ function getPersonalStatistic() {
         type : "GET",
         url : "/personalStatistic",
         success: function(data){
-            console.log(data);
-            data.forEach(function (item) {
-                $('.modal-body').append(
-                    "<div>"
-                    + item.shopName
-                    + " / "
-                    + item.productName
-                    + " = "
-                    + item.price
-                    + "p. / "
-                    + item.purchaseDate
-                    + "</div>"
-                )
-            })
+            appendPersonalStatistic(data);
         }
     });
+}
+
+function appendPersonalStatistic(data) {
+    $('.modal-body').append(
+        "<div class='statisticHeader'>"
+            + "<div class='statisticHeaderDate'>Дата:</div>"
+            + "<div class='statisticHeaderProduct'>Продукт:</div>"
+            + "<div class='statisticHeaderPrice'>Цена:</div>"
+            + "<div class='statisticHeaderShop'>Магазин:</div>"
+        + "</div>"
+    );
+    data.forEach(function (item) {
+        var shopName = item.shopName;
+        var productName = item.productName;
+        var price = item.price;
+        var purchaseDate = item.purchaseDate;
+
+        $('.modal-body').append(
+            "<div class='statisticBody'>"
+                + "<div class='statisticDate'>"
+                + purchaseDate
+                + "</div>"
+                + "<div class='statisticProduct'>"
+                + productName
+                + "</div>"
+                + "<div class='statisticPrice'>"
+                + price
+                + "</div>"
+                + "<div class='statisticShop'>"
+                + shopName
+                + "</div>"
+            + "</div>"
+        )
+    })
 }
 
 $(function() {});

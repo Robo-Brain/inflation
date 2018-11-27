@@ -7,14 +7,12 @@ import com.robo.repository.UserSettingsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.web.filter.CharacterEncodingFilter;
 
 import java.time.LocalDateTime;
 
@@ -121,16 +119,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
             return userDetailsRepo.save(user);
         };
-    }
-
-    @Bean
-    public FilterRegistrationBean filterRegistrationBean() {
-        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
-        characterEncodingFilter.setForceEncoding(true);
-        characterEncodingFilter.setEncoding("UTF-8");
-        registrationBean.setFilter(characterEncodingFilter);
-        return registrationBean;
     }
 
 }
