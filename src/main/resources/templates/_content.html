@@ -27,7 +27,7 @@
 <div id="goods">
     <th:block th:each="product : ${goods}">
         <div class="product">
-            <input class="price" th:id="${product.getId()}" type="number" />
+            <input class="price" th:id="${product.getId()}" type="number"  placeholder="10 - 999р." />
             <label th:text="${product.getName()}"></label>
         </div>
     </th:block>
