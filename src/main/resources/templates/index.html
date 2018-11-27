@@ -115,8 +115,10 @@
             setTimeout(function () {
                 var val = Math.round($('#' + id).val());
                 var shop = $('#shops').children(":selected").val();
-                savePrice(shop, id, val);
-            }, 1000)
+                setTimeout(function () {
+                    savePrice(shop, id, val);
+                }, 1000)
+            }, 500)
         });
 
         $('.addProduct').click(function (e) {

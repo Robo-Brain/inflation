@@ -179,6 +179,11 @@ function appendPersonalStatistic(data) {
             + "<div class='statisticHeaderShop'>Магазин:</div>"
         + "</div>"
     );
+    if (data.length <=0) {
+        $('.modal-body').append(
+            "<p style='text-align: center'>Ты еще ничего не купил :(</p>"
+        )
+    }
     data.forEach(function (item) {
         var shopName = item.shopName;
         var productName = item.productName;
@@ -203,9 +208,5 @@ function appendPersonalStatistic(data) {
         )
     })
 }
-
-$(function() {
-
-});
 
 $(function() {});

@@ -3,6 +3,7 @@ package com.robo.controller;
 import com.robo.Entities.*;
 import com.robo.Model.PersonalStatistic;
 import com.robo.repository.*;
+import com.robo.service.InflationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -30,6 +31,8 @@ public class MainController {
     PurchasesRepo purchasesRepo;
     @Autowired
     UserDetailsRepo userDetailsRepo;
+    @Autowired
+    InflationService inflationService;
 
     private ThreadLocal<User> userSession = new ThreadLocal<>();
     private ThreadLocal<UserSettings> userSettingsSession = new ThreadLocal<>();
@@ -83,26 +86,7 @@ public class MainController {
     @PostMapping("/savePrice")
     @ResponseBody
     public void savePrice(@RequestParam Map<String,String> requestParams) {
-
-        String userId = userSettingsSession.get().getUserId();
-        Integer shopId = Integer.parseInt(requestParams.get("shopId"));
-        Integer productId = Integer.parseInt(requestParams.get("productId"));
-        Integer price = Integer.parseInt(requestParams.get("price"));
-        LocalDate date = LocalDate.now();
-
-        Purchases purchases = purchasesRepo.findAllByUserIdAndShopIdAndProductIdAndDate(
-                userId,
-                shopId,
-                productId,
-                date).orElseGet(Purchases::new);
-
-        purchases.setUserId(userId);
-        purchases.setShopId(shopId);
-        purchases.setProductId(productId);
-        purchases.setPrice(price);
-        purchases.setDate(date);
-        purchasesRepo.saveAndFlush(purchases);
-
+        inflationService.savePriceService(userSettingsSession.get().getUserId(), requestParams);
     }
 
     @GetMapping("/personalStatistic")
