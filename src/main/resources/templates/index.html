@@ -112,7 +112,7 @@
             }
         });
 
-        $('.price').on("input change paste", function () {
+        $('.price').on("input", function () {
             var id = $(this).attr('id');
             var val = Math.round($('#' + id).val());
             var shop = $('#shops').children(":selected").val();

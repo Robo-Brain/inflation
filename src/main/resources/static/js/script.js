@@ -76,7 +76,7 @@ function savePrice(shopId, productId, price) {
         $.ajax({
             url: '/savePrice',
             type: 'POST',
-            data: jQuery.param({ shopId: shopId, productId: productId, price : price}) ,
+            data: jQuery.param({ shopId: shopId, productId: productId, price : price}),
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             success: function() {
                 $('#' + productId).each(function(){
@@ -89,10 +89,11 @@ function savePrice(shopId, productId, price) {
             error: function () {
                 $('#' + productId).each(function(){
                     $(this).css('color', 'red');
+                    alert('Ошибка, сообщите разработчику код ошибки: ' + productId);
                 });
             }
         });
-    }, 1000);
+    }, 700);
 }
 
 function showAddProductForm(e) {
