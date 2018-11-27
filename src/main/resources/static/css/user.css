@@ -86,39 +86,41 @@
     border-bottom: solid gray 1px;
 }
 .statisticHeaderDate {
-    width: 15%;
+    width: 13%;
     border-right: solid gray 1px;
 }
 .statisticHeaderProduct {
-    width: 38%;
+    width: 50%;
     border-right: solid gray 1px;
 }
 .statisticHeaderPrice {
-    width: 10%;
+    width: 8%;
     border-right: solid gray 1px;
 }
 .statisticHeaderShop {
-    width: 28%;
+    width: 20%;
 }
 
 .statisticBody div {
     font-size: 0.8em;
     float: left;
     height: 1.1em;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .statisticDate {
-    width: 15%;
+    width: 13%;
     padding: 0.1em 0 0.1em 0.1em;
 }
 .statisticProduct {
-    width: 38%;
+    width: 50%;
     padding: 0.1em 0 0.1em 0.8em;
 }
 .statisticPrice {
-    width: 10%;
+    width: 8%;
     padding: 0.1em 0 0.1em 1em;
 }
 .statisticShop {
-    width: 28%;
+    width: 20%;
     padding: 0.1em 0 0.1em 1em;
 }

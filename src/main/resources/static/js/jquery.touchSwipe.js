@@ -588,7 +588,7 @@
       }
 
       return null;
-    }
+    };
 
 
 
@@ -625,9 +625,8 @@
       //If we have a pointer event, whoes type is 'mouse' and we have said NO mouse events, then dont do anything.
       if(event.pointerType && event.pointerType=="mouse" && options.fallbackToMouseEvents==false) {
         return;
-      };
-
-      var ret,
+      }
+        var ret,
         touches = event.touches,
         evt = touches ? touches[0] : event;
 
@@ -700,11 +699,8 @@
       }
 
       return null;
-    };
-
-
-
-    /**
+    }
+      /**
      * Event handler for a touch move event.
      * If we change fingers during move, then cancel the event
      * @inner
@@ -1565,7 +1561,7 @@
       var withinThreshold = false;
 
       if (previousTouchEndTime) {
-        var diff = getTimeStamp() - previousTouchEndTime
+        var diff = getTimeStamp() - previousTouchEndTime;
         if (diff <= options.fingerReleaseThreshold) {
           withinThreshold = true;
         }
@@ -1881,7 +1877,7 @@
         right: offset.left + el.outerWidth(),
         top: offset.top,
         bottom: offset.top + el.outerHeight()
-      }
+      };
 
       return bounds;
     }
@@ -1900,9 +1896,8 @@
      */
     function isInBounds(point, bounds) {
       return (point.x > bounds.left && point.x < bounds.right && point.y > bounds.top && point.y < bounds.bottom);
-    };
-
-    /**
+    }
+      /**
      * Checks if the two points are equal
      * @param {object} point A point object.
      * @param {object} point B point object.
