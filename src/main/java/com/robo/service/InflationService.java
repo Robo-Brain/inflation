@@ -31,7 +31,7 @@ public class InflationService {
         purchases.setProductId(productId);
         purchases.setPrice(price);
         purchases.setDate(date);
-        purchasesRepo.saveAndFlush(purchases);
+        purchasesRepo.save(purchases);
 
     }
 
