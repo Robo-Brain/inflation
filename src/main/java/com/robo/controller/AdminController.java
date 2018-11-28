@@ -54,14 +54,16 @@ public class AdminController {
     @PostMapping("/delPurchase")
     @ResponseBody
     public void delPurchase(@RequestParam("id") Integer id){
-        if (userSession.get().getId().equals(adminId)) purchasesRepo.removeById(id);
+        if (userSession.get().getId().equals(adminId)) {
+            System.out.println(" > > > ADMIN DELETING PURCHASE WITH ID: " + id);
+            purchasesRepo.removeById(id);
+        } else System.out.println(" > > > NOT ADMIN TRYING TO DELETE PURCHASE");
     }
 
     @PostMapping("/delProduct")
     @ResponseBody
     public void delProduct(@RequestParam("id") Integer id){
         if (userSession.get().getId().equals(adminId)) goodsRepo.removeById(id);
-
     }
 
     @GetMapping
