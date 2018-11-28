@@ -37,13 +37,14 @@
                 $.post("/admin/delPurchase?id=" + id).done(function () {
                     location.reload();
                 });
+            });
+
             $('.delProductButton').click(function () {
                 var id = $(this).attr('id');
                 $.post("/admin/delProduct?id=" + id).done(function () {
                     location.reload();
                 });
-
-            })
+            });
 
         });
     </script>
