@@ -1,0 +1,52 @@
+<!doctype html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="_head"></th:block>
+<body>
+
+<th:block sec:authorize="isAnonymous()">
+    <div class="login">
+        Required login with
+        <a href="/login">
+            <blue>G</blue><red>o</red><yellow>o</yellow><blue>g</blue><green>l</green><red>e</red>
+        </a>
+    </div>
+</th:block>
+
+<th:block sec:authorize="isAuthenticated()">
+    <th:block th:switch="${userId}">
+        <div th:case="'116343510121280826843'">
+            <th:block th:include="_adminContent"></th:block>
+        </div>
+        <div th:case="*">
+            <h2>Алярма, ты не одмен, <a href="/">уходи!</a></h2>
+            <img width="500px" src="/img/getaway.png" />
+        </div>
+    </th:block>
+</th:block>
+
+<th:block sec:authorize="isAuthenticated()">
+    <script th:inline="javascript">
+        users = /*[[${users}]]*/ "";
+        goods = /*[[${goods}]]*/ "";
+        purchases = /*[[${purchases}]]*/ "";
+
+        $( document ).ready(function() {
+
+            $('.delPurchaseButton').click(function () {
+                var id = $(this).attr('id');
+                $.post("/admin/delPurchase?id=" + id).done(function () {
+                    location.reload();
+                });
+            $('.delProductButton').click(function () {
+                var id = $(this).attr('id');
+                $.post("/admin/delProduct?id=" + id).done(function () {
+                    location.reload();
+                });
+
+            })
+
+        });
+    </script>
+</th:block>
+</body>
+</html>

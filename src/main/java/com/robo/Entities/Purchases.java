@@ -51,4 +51,5 @@ public class Purchases {
         this.price = price;
         this.date = date;
     }
+
 }

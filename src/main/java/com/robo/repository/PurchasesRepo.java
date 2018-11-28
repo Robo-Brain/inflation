@@ -4,6 +4,7 @@ import com.robo.Entities.Purchases;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,5 +19,7 @@ public interface PurchasesRepo extends JpaRepository<Purchases, Integer> {
                                                                      @Param("shopId") Integer shopId,
                                                                      @Param("productId") Integer productId,
                                                                      @Param("date") LocalDate date);
+    @Transactional
+    void removeById(Integer id);
 
 }

@@ -1,0 +1,83 @@
+<h3>USERS:</h3>
+<table id="users">
+    <thead style="background: #fc0">
+        <tr>
+            <td>Name:</td>
+            <td>ID:</td>
+        </tr>
+    </thead>
+    <tbody>
+        <th:block th:field="*{users}">
+            <tr class="user" th:each="user : ${users}" th:value="${user.getId()}">
+                <td>
+                    <span th:text="${user.getName()}"></span>
+                </td>
+                <td>
+                    <span th:text="${user.getId()}"></span>
+                </td>
+            </tr>
+        </th:block>
+    </tbody>
+</table>
+
+<h3>GOODS:</h3>
+<table id="goods">
+    <thead style="background: #fc0">
+    <tr>
+        <td>Name:</td>
+        <td>ID:</td>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:field="*{goods}">
+        <tr class="good" th:each="good : ${goods}" th:value="${good.getId()}">
+            <td>
+                <span th:text="${good.getName()}"></span>
+            </td>
+            <td>
+                <span th:text="${good.getId()}"></span>
+            </td>
+            <td>
+                &nbsp;<button class="delProductButton" th:id="${good.getId()}">DEL</button>
+            </td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+
+<h3>PURCHASES:</h3>
+<table id="purchases">
+    <thead style="background: #fc0">
+    <tr>
+        <td>Date:</td>
+        <td>Username:</td>
+        <td>Product:</td>
+        <td>Price:</td>
+        <td>Shop:</td>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:field="*{purchases}">
+        <tr class="purchase" th:each="purchase : ${purchases}" th:value="${purchase.getPurchaseId()}">
+            <td>
+                <span th:text="${purchase.getDate()}"></span>
+            </td>
+            <td>
+                <span th:text="${purchase.getUserName()}"></span>
+            </td>
+            <td>
+                <span th:text="${purchase.getProductName()}"></span>
+            </td>
+            <td>
+                <span th:text="${purchase.getPrice()}"></span>
+            </td>
+            <td>
+                <span th:text="${purchase.getShopName()}"></span>
+            </td>
+            <td>
+                &nbsp;<button class="delPurchaseButton" th:id="${purchase.getPurchaseId()}">DEL</button>
+            </td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
