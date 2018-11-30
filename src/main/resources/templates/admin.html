@@ -14,7 +14,7 @@
 
 <th:block sec:authorize="isAuthenticated()">
     <th:block th:switch="${userId}">
-        <div th:case="'116343510121280826843'">
+        <div th:case="116343510121280826843">
             <th:block th:include="_adminContent"></th:block>
         </div>
         <div th:case="*">
@@ -47,6 +47,7 @@
             });
 
         });
+
     </script>
 </th:block>
 </body>

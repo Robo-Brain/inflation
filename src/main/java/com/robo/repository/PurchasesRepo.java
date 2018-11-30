@@ -14,6 +14,10 @@ public interface PurchasesRepo extends JpaRepository<Purchases, Integer> {
 
     List<Purchases> findAllByUserId(String id);
 
+    @Query("SELECT p FROM Purchases p where p.userId = :userId and p.productId = :productId")
+    List<Purchases> findAllByUserIdAndProductId(@Param("userId") String userId,
+                                                @Param("productId") Integer productId);
+
     @Query("SELECT p FROM Purchases p where p.userId = :userId and p.shopId = :shopId and p.productId = :productId and p.date = :date")
     Optional<Purchases> findAllByUserIdAndShopIdAndProductIdAndDate (@Param("userId") String userId,
                                                                      @Param("shopId") Integer shopId,

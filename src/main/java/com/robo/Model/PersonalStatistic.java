@@ -13,6 +13,9 @@ public class PersonalStatistic {
 
     @Getter
     @Setter
+    Integer id;
+    @Getter
+    @Setter
     Integer shopId;
     @Getter
     @Setter

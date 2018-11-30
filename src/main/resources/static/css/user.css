@@ -77,7 +77,8 @@
 }
 
 .statisticHeader {
-    margin-bottom: 0.5em;
+    height: 1.5em;
+    /*margin-bottom: 0.5em;*/
 }
 .statisticHeader div {
     float: left;
@@ -86,11 +87,11 @@
     border-bottom: solid gray 1px;
 }
 .statisticHeaderDate {
-    width: 13%;
+    width: 14%;
     border-right: solid gray 1px;
 }
 .statisticHeaderProduct {
-    width: 49%;
+    width: 48%;
     border-right: solid gray 1px;
 }
 .statisticHeaderPrice {
@@ -101,6 +102,12 @@
     width: 20%;
 }
 
+.statisticBody {
+    height:1.5em;
+}
+#statisticBodyBordered {
+    border-top: solid #000 1px;
+}
 .statisticBody div {
     font-size: 0.8em;
     float: left;
@@ -109,11 +116,11 @@
     overflow: hidden;
 }
 .statisticDate {
-    width: 13%;
+    width: 14%;
     padding: 0.1em 0 0.1em 0.1em;
 }
 .statisticProduct {
-    width: 49%;
+    width: 48%;
     padding: 0.1em 0 0.1em 0.8em;
 }
 .statisticPrice {

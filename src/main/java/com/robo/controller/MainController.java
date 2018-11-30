@@ -1,6 +1,9 @@
 package com.robo.controller;
 
-import com.robo.Entities.*;
+import com.robo.Entities.Goods;
+import com.robo.Entities.Shops;
+import com.robo.Entities.User;
+import com.robo.Entities.UserSettings;
 import com.robo.Model.PersonalStatistic;
 import com.robo.repository.*;
 import com.robo.service.InflationService;
@@ -12,8 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -92,41 +93,9 @@ public class MainController {
     @GetMapping("/personalStatistic")
     @ResponseBody
     public List<PersonalStatistic> personalStatistic() {
-
-        String userId = userSettingsSession.get().getUserId();
-
-        List<Purchases> purchases = purchasesRepo.findAllByUserId(userId);
-
-        List<PersonalStatistic> personalStatisticList = new ArrayList<>();
-
-        purchases.forEach(purchase -> {
-
-        Integer shopId = purchase.getShopId();
-        String shopName = shopsRepo.findById(shopId).get().getName();
-
-        Integer productId = purchase.getProductId();
-        String productName = goodsRepo.findById(productId).get().getName();
-
-        Integer price = purchase.getPrice();
-
-        LocalDate date = purchase.getDate();
-
-        PersonalStatistic personalStatistic = new PersonalStatistic(
-                shopId,
-                shopName,
-                productId,
-                productName,
-                price,
-                date
-        );
-
-        personalStatisticList.add(personalStatistic);
-
-        });
-
-        return personalStatisticList;
-
+        return inflationService.getPersonalStatistic(userSettingsSession.get().getUserId());
     }
+
      @RequestMapping(value="/goodsFilter", method=RequestMethod.GET)
      @ResponseBody
      public List<Goods> goodsFilter(@RequestParam String letter) {

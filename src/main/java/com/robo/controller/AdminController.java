@@ -33,7 +33,7 @@ public class AdminController {
     private ThreadLocal<User> userSession = new ThreadLocal<>();
 
     @ModelAttribute
-    public void models(Model model, @AuthenticationPrincipal User user) throws Exception {
+    public void models(Model model, @AuthenticationPrincipal User user) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -53,11 +53,8 @@ public class AdminController {
 
     @PostMapping("/delPurchase")
     @ResponseBody
-    public void delPurchase(@RequestParam("id") Integer id){
-        if (userSession.get().getId().equals(adminId)) {
-            System.out.println(" > > > ADMIN DELETING PURCHASE WITH ID: " + id);
-            purchasesRepo.removeById(id);
-        } else System.out.println(" > > > NOT ADMIN TRYING TO DELETE PURCHASE");
+    public void delPurchase(@RequestParam("id") Integer id) {
+        if (userSession.get().getId().equals(adminId)) purchasesRepo.removeById(id);
     }
 
     @PostMapping("/delProduct")

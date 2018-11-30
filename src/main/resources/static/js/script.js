@@ -171,7 +171,8 @@ function getPersonalStatistic() {
     });
 }
 
-function appendPersonalStatistic(data) {
+function appendPersonalStatistic(personalStatisticData) {
+    console.log(personalStatisticData);
     $('.modal-body').append(
         "<div class='statisticHeader'>"
             + "<div class='statisticHeaderDate'>Дата:</div>"
@@ -180,30 +181,38 @@ function appendPersonalStatistic(data) {
             + "<div class='statisticHeaderShop'>Магазин:</div>"
         + "</div>"
     );
-    if (data.length <=0) {
+    if (personalStatisticData.length <=0) {
         $('.modal-body').append(
             "<p style='text-align: center'>Ты еще ничего не купил :(</p>"
         )
     }
-    data.forEach(function (item) {
+    var purchaseDate;
+    personalStatisticData.forEach(function (item) {
         var shopName = item.shopName;
         var productName = item.productName;
         var price = item.price;
-        var purchaseDate = item.purchaseDate;
+        var statisticBodyId = item.id;
+
+        if (item.purchaseDate == purchaseDate) {
+            purchaseDate = item.purchaseDate;
+        } else {
+            statisticBodyId = 'statisticBodyBordered';
+            purchaseDate = item.purchaseDate;
+        }
 
         $('.modal-body').append(
-            "<div class='statisticBody'>"
+            "<div id='" + statisticBodyId + "' class='statisticBody'>"
                 + "<div class='statisticDate'>"
-                + purchaseDate
+                    + purchaseDate
                 + "</div>"
                 + "<div class='statisticProduct'>"
-                + productName
+                    + productName
                 + "</div>"
                 + "<div class='statisticPrice'>"
-                + price
+                    + price
                 + "</div>"
                 + "<div class='statisticShop'>"
-                + shopName
+                    + shopName
                 + "</div>"
             + "</div>"
         )
