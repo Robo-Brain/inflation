@@ -1,3 +1,4 @@
+<a href="/">Back</a>
 <h3>USERS:</h3>
 <table id="users">
     <thead style="background: #fc0">
@@ -46,6 +47,23 @@
 </table>
 
 <h3>PURCHASES:</h3>
+<div id="adminPurchasesSort">
+    <div>
+        By User
+        <br />
+        <select id="purchasesUsers"></select>
+    </div>
+    <div>
+        By Date
+        <br />
+        <select id="purchasesDates"></select>
+    </div>
+    <div>
+        By Shop
+        <br />
+        <select id="purchasesShops"></select>
+    </div>
+</div>
 <table id="purchases">
     <thead style="background: #fc0">
     <tr>
@@ -58,9 +76,9 @@
     </thead>
     <tbody>
     <th:block th:field="*{purchases}">
-        <tr class="purchase" th:each="purchase : ${purchases}" th:value="${purchase.getPurchaseId()}">
+        <tr class="purchase" th:each="purchase : ${purchases}" th:value="${purchase.getId()}">
             <td>
-                <span th:text="${purchase.getDate()}"></span>
+                <span th:text="${purchase.getPurchaseDate()}"></span>
             </td>
             <td>
                 <span th:text="${purchase.getUserName()}"></span>
@@ -75,7 +93,7 @@
                 <span th:text="${purchase.getShopName()}"></span>
             </td>
             <td>
-                &nbsp;<button class="delPurchaseButton" th:id="${purchase.getPurchaseId()}">DEL</button>
+                &nbsp;<button class="delPurchaseButton" th:id="${purchase.getId()}">DEL</button>
             </td>
         </tr>
     </th:block>

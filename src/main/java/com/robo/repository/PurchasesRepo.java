@@ -26,4 +26,6 @@ public interface PurchasesRepo extends JpaRepository<Purchases, Integer> {
     @Transactional
     void removeById(Integer id);
 
+    List<Purchases> findAllByDate(LocalDate date);
+
 }

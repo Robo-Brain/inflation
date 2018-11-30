@@ -70,6 +70,16 @@ function appendGoodsAndFilter() {
     });
 }
 
+function filter(letter, callback) {
+    $.ajax({
+        type : "GET",
+        url : "/goodsFilter?letter=" + letter,
+        success: function(data){
+            callback(data);
+        }
+    });
+}
+
 function savePrice(shopId, productId, price) {
     clearTimeout(timeout);
     timeout = setTimeout(function () {
@@ -149,16 +159,6 @@ function wrapClose() {
     $('.addProduct').removeClass("showProductForm");
     $('.addShop').removeClass("showShopForm");
     $('.add').show();
-}
-
-function filter(letter, callback) {
-    $.ajax({
-        type : "GET",
-        url : "/goodsFilter?letter=" + letter,
-        success: function(data){
-            callback(data);
-        }
-    });
 }
 
 function getPersonalStatistic() {

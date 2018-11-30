@@ -2,7 +2,6 @@ package com.robo.service;
 
 import com.robo.Entities.Goods;
 import com.robo.Entities.Purchases;
-import com.robo.Model.PersonalStatistic;
 import com.robo.Model.PurchasesModel;
 import com.robo.repository.GoodsRepo;
 import com.robo.repository.PurchasesRepo;
@@ -50,32 +49,27 @@ public class InflationService {
 
     }
 
-    public List<PersonalStatistic> getPersonalStatistic(String userId) {
-        List<PersonalStatistic> personalStatisticList = new ArrayList<>();
+    public List<PurchasesModel> getPersonalStatistic(String userId) {
+        List<PurchasesModel> personalStatisticList = new ArrayList<>();
 
         List<Purchases> purchases = purchasesRepo.findAllByUserId(userId);
 
         purchases.forEach(purchase -> {
 
-            Integer id = purchase.getId();
             Integer shopId = purchase.getShopId();
-            String shopName = shopsRepo.findById(shopId).get().getName();
             Integer productId = purchase.getProductId();
-            String productName = goodsRepo.findById(productId).get().getName();
-            Integer price = purchase.getPrice();
-            LocalDate date = purchase.getDate();
 
-            PersonalStatistic personalStatistic = new PersonalStatistic(
-                    id,
-                    shopId,
-                    shopName,
+            PurchasesModel purchaseModel = new PurchasesModel(
+                    purchase.getId(),
+                    purchase.getDate(),
                     productId,
-                    productName,
-                    price,
-                    date
+                    goodsRepo.findById(productId).get().getName(),
+                    purchase.getPrice(),
+                    shopId,
+                    shopsRepo.findById(shopId).get().getName()
             );
 
-            personalStatisticList.add(personalStatistic);
+            personalStatisticList.add(purchaseModel);
         });
 
         return personalStatisticList;
@@ -89,7 +83,7 @@ public class InflationService {
         purchasesList.forEach(purchase -> {
             PurchasesModel purchaseModel = new PurchasesModel(
                     purchase.getId(),
-                    purchase.getDate().toString(),
+                    purchase.getDate(),
                     userDetailsRepo.findById(purchase.getUserId()).map(user -> user.getName()).orElse(null),
                     goodsRepo.findById(purchase.getProductId()).map(product -> product.getName()).orElse(null),
                     purchase.getPrice(),
@@ -107,7 +101,7 @@ public class InflationService {
         purchasesList.forEach(purchase -> {
             PurchasesModel purchaseModel = new PurchasesModel(
                     purchase.getId(),
-                    purchase.getDate().toString(),
+                    purchase.getDate(),
                     userDetailsRepo.findById(purchase.getUserId()).map(user -> user.getName()).orElse(null),
                     goodsRepo.findById(purchase.getProductId()).map(product -> product.getName()).orElse(null),
                     purchase.getPrice(),
@@ -137,4 +131,24 @@ public class InflationService {
 
     }
 
+    public List<PurchasesModel> getPurchasesByDate(String date) {
+        LocalDate locDate = LocalDate.parse(date);
+
+        List<Purchases> purchasesList = purchasesRepo.findAllByDate(locDate);
+
+
+        List<PurchasesModel> purchasesResult = new ArrayList<>();
+        purchasesList.forEach(purchase -> {
+            PurchasesModel purchaseModel = new PurchasesModel(
+                    purchase.getId(),
+                    purchase.getDate(),
+                    userDetailsRepo.findById(purchase.getUserId()).map(user -> user.getName()).orElse(null),
+                    goodsRepo.findById(purchase.getProductId()).map(product -> product.getName()).orElse(null),
+                    purchase.getPrice(),
+                    shopsRepo.findById(purchase.getShopId()).map(shop -> shop.getName()).orElse(null)
+            );
+            purchasesResult.add(purchaseModel);
+        });
+        return purchasesResult;
+    }
 }

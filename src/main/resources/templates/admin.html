@@ -1,6 +1,7 @@
 <!doctype html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:include="_head"></th:block>
+<th:block th:include="_adminHead"></th:block>
 <body>
 
 <th:block sec:authorize="isAnonymous()">
@@ -29,10 +30,13 @@
         users = /*[[${users}]]*/ "";
         goods = /*[[${goods}]]*/ "";
         purchases = /*[[${purchases}]]*/ "";
+        shops = /*[[${shops}]]*/ "";
+
+        console.log(purchases);
 
         $( document ).ready(function() {
 
-            $('.delPurchaseButton').click(function () {
+            $(document).on('click', '.delPurchaseButton', function() {
                 var id = $(this).attr('id');
                 $.post("/admin/delPurchase?id=" + id).done(function () {
                     location.reload();
@@ -44,6 +48,21 @@
                 $.post("/admin/delProduct?id=" + id).done(function () {
                     location.reload();
                 });
+            });
+
+            appendPurchaseUsers();
+
+            appendPurchaseDates();
+
+            appendPurchaseShops();
+
+            $('#purchasesUsers').on('change', function () {
+                var id = $(this).children(":selected").attr('id');
+                sortPurchasesByUser(id);
+            });
+            $('#purchasesDates').on('change', function () {
+                var date = $(this).children(":selected").attr('value');
+                sortPurchasesByDate(date);
             });
 
         });

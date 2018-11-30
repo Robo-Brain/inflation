@@ -4,7 +4,7 @@ import com.robo.Entities.Goods;
 import com.robo.Entities.Shops;
 import com.robo.Entities.User;
 import com.robo.Entities.UserSettings;
-import com.robo.Model.PersonalStatistic;
+import com.robo.Model.PurchasesModel;
 import com.robo.repository.*;
 import com.robo.service.InflationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,11 +92,11 @@ public class MainController {
 
     @GetMapping("/personalStatistic")
     @ResponseBody
-    public List<PersonalStatistic> personalStatistic() {
+    public List<PurchasesModel> personalStatistic() {
         return inflationService.getPersonalStatistic(userSettingsSession.get().getUserId());
     }
 
-     @RequestMapping(value="/goodsFilter", method=RequestMethod.GET)
+     @GetMapping("/goodsFilter")
      @ResponseBody
      public List<Goods> goodsFilter(@RequestParam String letter) {
          return goodsRepo.findByNameStartingWith(letter);

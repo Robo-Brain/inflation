@@ -73,13 +73,17 @@ input {
     height: 6em;
     width: 12em;
     background-color: #fff;
-    font-size: 1.5em;
+    font-size: 1.6em;
     z-index: 4;
     opacity: 0.97;
     /*-webkit-transition: all 0.8s ease;*/
     /*-moz-transition: all 0.8s ease;*/
     /*-o-transition: all 0.8s ease;*/
     /*transition: all 0.8s ease;*/
+}
+#menu span a{
+    font-size: 0.8em !important;
+    color: #ccc !important;
 }
 #menu a {
     text-decoration: none;

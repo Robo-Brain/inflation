@@ -5,19 +5,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class PurchasesModel {
 
     @Getter
     @Setter
-    Integer purchaseId;
+    Integer id;
     @Getter
     @Setter
-    String date;
+    LocalDate purchaseDate;
     @Getter
     @Setter
     String userName;
+    @Getter
+    @Setter
+    Integer productId;
     @Getter
     @Setter
     String productName;
@@ -26,6 +31,27 @@ public class PurchasesModel {
     Integer price;
     @Getter
     @Setter
+    Integer shopId;
+    @Getter
+    @Setter
     String shopName;
 
+    public PurchasesModel(Integer id, LocalDate purchaseDate, Integer productId, String productName, Integer price, Integer shopId, String shopName) {
+        this.id = id;
+        this.purchaseDate = purchaseDate;
+        this.productId = productId;
+        this.productName = productName;
+        this.price = price;
+        this.shopId = shopId;
+        this.shopName = shopName;
+    }
+
+    public PurchasesModel(Integer id, LocalDate purchaseDate, String userName, String productName, Integer price, String shopName) {
+        this.id = id;
+        this.purchaseDate = purchaseDate;
+        this.userName = userName;
+        this.productName = productName;
+        this.price = price;
+        this.shopName = shopName;
+    }
 }

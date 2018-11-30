@@ -1,0 +1,13 @@
+#adminPurchasesSort {
+    margin-left: 1%;
+}
+
+#adminPurchasesSort div {
+    width: 31.5%;
+    float: left;
+    margin-right: 1%;
+}
+#adminPurchasesSort select {
+    width: 100%;
+    font-size: 1.1em;
+}

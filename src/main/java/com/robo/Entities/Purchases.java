@@ -52,4 +52,15 @@ public class Purchases {
         this.date = date;
     }
 
+    @Override
+    public String toString() {
+        return "Purchases{" +
+                "id=" + id +
+                ", userId='" + userId + '\'' +
+                ", shopId=" + shopId +
+                ", productId=" + productId +
+                ", price=" + price +
+                ", date=" + date +
+                '}';
+    }
 }
