@@ -110,7 +110,8 @@
             }
         });
 
-        $('.price').on("input", function () {
+//         $('.price').on("input", function () {
+        $(document).on('input', '.price', function() {
             console.log('input has been changed')
             var id = $(this).attr('id');
             var val = Math.round($('#' + id).val());
