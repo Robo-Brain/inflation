@@ -122,6 +122,18 @@ function showAddProductForm(e) {
 }
 function submitNewProduct() {
     var name = $('#productName').val();
+    name = name.replace("+", "%2B")
+                .replace(' ', '+')	                
+                .replace(' ', '+')
+                .replace("\"", "%22")	                
+                .replace("\"", "%22")
+                .replace("%", "%25")
+                .replace("<", "%3C")	                
+                .replace("<", "%3C")
+                .replace(">", "%3E")	                
+                .replace(">", "%3E")
+                .replace("^", "%5E")	                
+                .replace("^", "%5E");
     if(!!name || name != '')
         $.post("/addProduct?name=" + name)
             .done(function () {
