@@ -105,6 +105,9 @@
 .statisticBody {
     height:1.5em;
 }
+.statisticBody:nth-child(even) {
+    background-color: #e6e6e6;
+}
 #statisticBodyBordered {
     border-top: solid #000 1px;
 }
