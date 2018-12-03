@@ -1,3 +1,12 @@
+#goods input {
+    width: 25em;
+    font-size: 1em !important;
+    line-height: 1.2em !important;
+}
+.product {
+    height: 1.6em !important;
+}
+
 #adminPurchasesSort {
     margin-left: 1%;
 }
@@ -10,4 +19,11 @@
 #adminPurchasesSort select {
     width: 100%;
     font-size: 1.1em;
+}
+
+.purchase {
+    height: 1.6em;
+}
+.purchase:nth-child(even) {
+    background-color: #e6e6e6;
 }

@@ -25,21 +25,23 @@
 <table id="goods">
     <thead style="background: #fc0">
     <tr>
-        <td>Name:</td>
         <td>ID:</td>
+        <td>Name:</td>
+        <td>Stuff:</td>
     </tr>
     </thead>
     <tbody>
     <th:block th:field="*{goods}">
-        <tr class="good" th:each="good : ${goods}" th:value="${good.getId()}">
+        <tr class="product" th:classappend="${product.getId()}" th:each="product : ${goods}" th:value="${product.getId()}">
             <td>
-                <span th:text="${good.getName()}"></span>
+                <span th:text="${product.getId()}"></span>
             </td>
             <td>
-                <span th:text="${good.getId()}"></span>
+                <input class="productName" th:classappend="${product.getId()}" th:value="${product.getName()}" />
             </td>
             <td>
-                &nbsp;<button class="delProductButton" th:id="${good.getId()}">DEL</button>
+                &nbsp;<button class="delProductButton" th:id="${product.getId()}">DEL</button>
+                &nbsp;<button class="saveProductButton" th:id="${product.getId()}">SAVE</button>
             </td>
         </tr>
     </th:block>
@@ -72,28 +74,36 @@
         <td>Product:</td>
         <td>Price:</td>
         <td>Shop:</td>
+        <td>Stuff:</td>
     </tr>
     </thead>
     <tbody>
     <th:block th:field="*{purchases}">
-        <tr class="purchase" th:each="purchase : ${purchases}" th:value="${purchase.getId()}">
+        <tr class="purchase" th:classappend="${purchase.getId()}" th:each="purchase : ${purchases}" th:value="${purchase.getId()}">
             <td>
-                <span th:text="${purchase.getPurchaseDate()}"></span>
+                <input th:value="${purchase.getPurchaseDate()}" />
             </td>
             <td>
                 <span th:text="${purchase.getUserName()}"></span>
             </td>
             <td>
-                <span th:text="${purchase.getProductName()}"></span>
+                <select>
+                    <option th:each="prod : ${goods}"
+                            th:value="${prod.getName()}"
+                            th:utext="${prod.getName()}"
+                            th:selected="(${prod.getId()} == *{purchase.getProductId()})"
+                    />
+                </select>
             </td>
             <td>
-                <span th:text="${purchase.getPrice()}"></span>
+                <input th:value="${purchase.getPrice()}" />
             </td>
             <td>
                 <span th:text="${purchase.getShopName()}"></span>
             </td>
             <td>
                 &nbsp;<button class="delPurchaseButton" th:id="${purchase.getId()}">DEL</button>
+                &nbsp;<button class="savePurchaseButton" th:id="${purchase.getId()}">SAVE</button>
             </td>
         </tr>
     </th:block>

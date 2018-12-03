@@ -23,4 +23,6 @@ public interface GoodsRepo extends JpaRepository<Goods, Integer> {
 
     @Transactional
     void removeById(Integer id);
+
+    Goods findAllById(Integer productId);
 }

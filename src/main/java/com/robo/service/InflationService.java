@@ -81,14 +81,14 @@ public class InflationService {
 
         List<PurchasesModel> purchasesResult = new ArrayList<>();
         purchasesList.forEach(purchase -> {
-            PurchasesModel purchaseModel = new PurchasesModel(
-                    purchase.getId(),
-                    purchase.getDate(),
-                    userDetailsRepo.findById(purchase.getUserId()).map(user -> user.getName()).orElse(null),
-                    goodsRepo.findById(purchase.getProductId()).map(product -> product.getName()).orElse(null),
-                    purchase.getPrice(),
-                    shopsRepo.findById(purchase.getShopId()).map(shop -> shop.getName()).orElse(null)
-            );
+            PurchasesModel purchaseModel = new PurchasesModel();
+            purchaseModel.setId(purchase.getId());
+            purchaseModel.setPurchaseDate(purchase.getDate());
+            purchaseModel.setUserName(userDetailsRepo.findById(purchase.getUserId()).map(user -> user.getName()).orElse(null));
+            purchaseModel.setProductId(purchase.getProductId());
+            purchaseModel.setProductName(goodsRepo.findById(purchase.getProductId()).map(product -> product.getName()).orElse(null));
+            purchaseModel.setPrice(purchase.getPrice());
+            purchaseModel.setShopName(shopsRepo.findById(purchase.getShopId()).map(shop -> shop.getName()).orElse(null));
             purchasesResult.add(purchaseModel);
         });
         return purchasesResult;
@@ -99,14 +99,13 @@ public class InflationService {
 
         List<PurchasesModel> purchasesResult = new ArrayList<>();
         purchasesList.forEach(purchase -> {
-            PurchasesModel purchaseModel = new PurchasesModel(
-                    purchase.getId(),
-                    purchase.getDate(),
-                    userDetailsRepo.findById(purchase.getUserId()).map(user -> user.getName()).orElse(null),
-                    goodsRepo.findById(purchase.getProductId()).map(product -> product.getName()).orElse(null),
-                    purchase.getPrice(),
-                    shopsRepo.findById(purchase.getShopId()).map(shop -> shop.getName()).orElse(null)
-            );
+            PurchasesModel purchaseModel = new PurchasesModel();
+            purchaseModel.setId(purchase.getId());
+            purchaseModel.setPurchaseDate(purchase.getDate());
+            purchaseModel.setUserName(userDetailsRepo.findById(purchase.getUserId()).map(user -> user.getName()).orElse(null));
+            purchaseModel.setProductName(goodsRepo.findById(purchase.getProductId()).map(product -> product.getName()).orElse(null));
+            purchaseModel.setPrice(purchase.getPrice());
+            purchaseModel.setShopName(shopsRepo.findById(purchase.getShopId()).map(shop -> shop.getName()).orElse(null));
             purchasesResult.add(purchaseModel);
         });
         return purchasesResult;
@@ -149,4 +148,12 @@ public class InflationService {
         });
         return purchasesResult;
     }
+
+    public void editProduct(Map<String, String> productParams) {
+        Goods product = goodsRepo.findAllById(Integer.valueOf(productParams.get("productId")));
+        System.out.println(product.toString());
+        product.setName(productParams.get("productName"));
+        goodsRepo.save(product);
+    }
+
 }

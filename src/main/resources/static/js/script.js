@@ -99,7 +99,7 @@ function savePrice(shopId, productId, price) {
             error: function () {
                 $('#' + productId).each(function(){
                     $(this).css('color', 'red');
-                    // alert('Ошибка, сообщите разработчику код ошибки: ' + productId);
+                    alert('Ошибка, сообщите разработчику код ошибки: ' + productId);
                 });
             }
         });

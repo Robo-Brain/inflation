@@ -12,8 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/admin")
@@ -68,6 +68,13 @@ public class AdminController {
         if (userSession.get().getId().equals(adminId)) goodsRepo.removeById(id);
     }
 
+    @PostMapping("/editProduct")
+    @ResponseBody
+    public void delProduct(@RequestParam Map<String,String> requestParams){
+        System.out.println(requestParams.toString());
+        if (userSession.get().getId().equals(adminId)) inflationService.editProduct(requestParams);
+    }
+
     @GetMapping("/getPurchasesByUser")
     @ResponseBody
     public List<PurchasesModel> getPurchasesByUser(@RequestParam String id){
@@ -78,7 +85,7 @@ public class AdminController {
 
     @GetMapping("/getPurchasesByDate")
     @ResponseBody
-    public List<PurchasesModel> getPurchasesByDate(@RequestParam String date) throws ParseException {
+    public List<PurchasesModel> getPurchasesByDate(@RequestParam String date) {
         if (userSession.get().getId().equals(adminId)) {
             return inflationService.getPurchasesByDate(date);
         } else return null;

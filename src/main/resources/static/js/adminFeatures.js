@@ -52,6 +52,17 @@ function sortPurchasesByDate(date) {
     });
 }
 
+function editProductName(productId, productName) {
+    $.ajax({
+        type : "POST",
+        url : "/admin/editProduct",
+        data: jQuery.param({productId: productId, productName : productName}),
+        success: function(){
+            location.reload();
+        }
+    });
+}
+
 function sortPurchasesByShop(shop) {
     $.ajax({
         type : "GET",
@@ -68,25 +79,26 @@ function appendSort(purchases) {
         console.log(purchase.purchaseDate);
         $('#purchases').append(
             "<tr class='purchase' value='" + purchase.id + "'>" +
-                + "<td><span>"
+                + "<td><input value='"
                     + purchase.purchaseDate
-                + "</span></td>"
-                + "<td><span>"
+                + "'/></td>"
+                + "<td><input value='"
                     + purchase.purchaseDate
-                + "</span></td>"
+                + "'/></td>"
                 + "<td><span>"
                     + purchase.userName
                 + "</span></td>"
                 + "<td><span>"
                     + purchase.productName
                 + "</span></td>"
-                + "<td><span>"
+                + "<td><input value='"
                     + purchase.price
-                + "</span></td>"
+                + "'/></td>"
                 + "<td><span>"
                     + purchase.shopName
                 + "</span></td>"
-                + "<td>&nbsp;<button class='delPurchaseButton' id='" + purchase.id + "'>DEL</button></td>"
+                + "<td>&nbsp;<button class='delPurchaseButton' id='" + purchase.id + "'>DEL</button>"
+                    + "&nbsp;<button class='savePurchaseButton' id='" + purchase.id + "'>SAVE</button></td>"
             + "</tr>"
         )
     });

@@ -54,4 +54,15 @@ public class PurchasesModel {
         this.price = price;
         this.shopName = shopName;
     }
+
+    public PurchasesModel(Integer id, LocalDate purchaseDate, String userName, Integer productId, String productName, Integer price, String shopName) {
+        this.id = id;
+        this.purchaseDate = purchaseDate;
+        this.userName = userName;
+        this.productId = productId;
+        this.productName = productName;
+        this.price = price;
+        this.shopName = shopName;
+    }
+
 }

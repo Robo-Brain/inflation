@@ -26,7 +26,6 @@ public interface PurchasesRepo extends JpaRepository<Purchases, Integer> {
     @Transactional
     void removeById(Integer id);
 
-
     List<Purchases> findAllByDateBetween(
             LocalDate dateStart,
             LocalDate dateEnd);
