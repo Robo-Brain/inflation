@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -53,6 +54,7 @@ public class MainController {
 
             model.addAttribute("shops", shopsRepo.findAll());
             model.addAttribute("goods", goodsRepo.findAllOrderByNameAsc());
+            model.addAttribute("todaysPurchases", purchasesRepo.findAllByUserIdAndDateBetween(userSession.get().getId(), LocalDate.now(), LocalDate.now().plusDays(1)));
 
         }
     }

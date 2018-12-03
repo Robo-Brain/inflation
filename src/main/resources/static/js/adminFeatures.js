@@ -47,8 +47,7 @@ function sortPurchasesByDate(date) {
         type : "GET",
         url : "/admin/getPurchasesByDate?date=" + date,
         success: function(data){
-            console.log(data)
-            // appendSort(data);
+            appendSort(data);
         }
     });
 }

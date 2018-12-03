@@ -26,6 +26,10 @@ public interface PurchasesRepo extends JpaRepository<Purchases, Integer> {
     @Transactional
     void removeById(Integer id);
 
-    List<Purchases> findAllByDate(LocalDate date);
 
+    List<Purchases> findAllByDateBetween(
+            LocalDate dateStart,
+            LocalDate dateEnd);
+
+    List<Purchases> findAllByUserIdAndDateBetween(String id, LocalDate startDate, LocalDate endDate);
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @Controller
@@ -77,7 +78,7 @@ public class AdminController {
 
     @GetMapping("/getPurchasesByDate")
     @ResponseBody
-    public List<PurchasesModel> getPurchasesByDate(@RequestParam String date) {
+    public List<PurchasesModel> getPurchasesByDate(@RequestParam String date) throws ParseException {
         if (userSession.get().getId().equals(adminId)) {
             return inflationService.getPurchasesByDate(date);
         } else return null;

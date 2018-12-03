@@ -132,10 +132,8 @@ public class InflationService {
     }
 
     public List<PurchasesModel> getPurchasesByDate(String date) {
-        LocalDate locDate = LocalDate.parse(date);
-
-        List<Purchases> purchasesList = purchasesRepo.findAllByDate(locDate);
-
+        LocalDate startDate = LocalDate.parse(date);
+        List<Purchases> purchasesList = purchasesRepo.findAllByDateBetween(startDate, startDate.plusDays(1));
 
         List<PurchasesModel> purchasesResult = new ArrayList<>();
         purchasesList.forEach(purchase -> {

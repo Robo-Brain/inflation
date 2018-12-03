@@ -99,7 +99,7 @@ function savePrice(shopId, productId, price) {
             error: function () {
                 $('#' + productId).each(function(){
                     $(this).css('color', 'red');
-                    alert('Ошибка, сообщите разработчику код ошибки: ' + productId);
+                    // alert('Ошибка, сообщите разработчику код ошибки: ' + productId);
                 });
             }
         });
@@ -228,6 +228,14 @@ function appendPersonalStatistic(personalStatisticData) {
                 + "</div>"
             + "</div>"
         )
+    })
+}
+
+function highlightAlreadyFilledToday(){
+    todaysPurchases.forEach(function (purchase) {
+        $('#' + purchase.productId).css('opacity', '0.5');
+        $('#' + purchase.productId).attr("placeholder", purchase.price + "р.");
+        $('#' + purchase.productId).next().css('color', '#00b300').css('opacity', '0.4');
     })
 }
 
