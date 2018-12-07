@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class InflationService {
@@ -52,9 +49,24 @@ public class InflationService {
     public List<PurchasesModel> getPersonalStatistic(String userId) {
         List<PurchasesModel> personalStatisticList = new ArrayList<>();
 
-        List<Purchases> purchases = purchasesRepo.findAllByUserId(userId);
+        String dateInString = LocalDate.now().getYear() + "-" + LocalDate.now().getMonthValue();
+        LocalDate startDate = LocalDate.parse(dateInString + "-01");
+        LocalDate endDate = LocalDate.parse(dateInString + "-31");
 
-        purchases.forEach(purchase -> {
+        List<Purchases> purchasesList = purchasesRepo.findAllByUserIdAndDateBetween(userId, startDate, endDate);
+
+        while (purchasesList.isEmpty() && startDate.getYear() > 2017){
+            if (startDate.getMonthValue() > 1) {
+                startDate = startDate.minusMonths(1);
+                purchasesList = purchasesRepo.findAllByUserIdAndDateBetween(userId, startDate, endDate);
+            } else {
+                Calendar cal = Calendar.getInstance();
+                startDate = LocalDate.of(cal.get(Calendar.YEAR)-1,12, 1);
+                purchasesList = purchasesRepo.findAllByUserIdAndDateBetween(userId, startDate, endDate);
+            }
+        }
+
+        purchasesList.forEach(purchase -> {
 
             Integer shopId = purchase.getShopId();
             Integer productId = purchase.getProductId();
@@ -151,7 +163,6 @@ public class InflationService {
 
     public void editProduct(Map<String, String> productParams) {
         Goods product = goodsRepo.findAllById(Integer.valueOf(productParams.get("productId")));
-        System.out.println(product.toString());
         product.setName(productParams.get("productName"));
         goodsRepo.save(product);
     }

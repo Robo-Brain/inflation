@@ -71,7 +71,6 @@ public class AdminController {
     @PostMapping("/editProduct")
     @ResponseBody
     public void delProduct(@RequestParam Map<String,String> requestParams){
-        System.out.println(requestParams.toString());
         if (userSession.get().getId().equals(adminId)) inflationService.editProduct(requestParams);
     }
 

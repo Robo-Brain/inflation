@@ -30,5 +30,8 @@ public interface PurchasesRepo extends JpaRepository<Purchases, Integer> {
             LocalDate dateStart,
             LocalDate dateEnd);
 
-    List<Purchases> findAllByUserIdAndDateBetween(String id, LocalDate startDate, LocalDate endDate);
+    List<Purchases> findAllByUserIdAndDateBetween(
+            String id,
+            LocalDate startDate,
+            LocalDate endDate);
 }
