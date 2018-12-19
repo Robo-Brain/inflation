@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.IntStream;
 
 @Service
 public class InflationService {
@@ -25,7 +26,32 @@ public class InflationService {
     @Autowired
     UserDetailsRepo userDetailsRepo;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        InflationService that = (InflationService) o;
+        return Objects.equals(shopsRepo, that.shopsRepo) &&
+                Objects.equals(goodsRepo, that.goodsRepo) &&
+                Objects.equals(purchasesRepo, that.purchasesRepo) &&
+                Objects.equals(userDetailsRepo, that.userDetailsRepo);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(shopsRepo, goodsRepo, purchasesRepo, userDetailsRepo);
+    }
+
     public void savePriceService(String userId, Map<String,String> requestParams) {
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+        HashMap<Integer, Integer> reverseSortedMap = new HashMap<>();
+        IntStream.range(0, 100).forEach(num -> map.put(num, num));
+        map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByKey().reversed()).forEach(item -> reverseSortedMap.put(item.getKey(), item.getValue()));
+
+
+
         Integer shopId = Integer.parseInt(requestParams.get("shopId"));
         Integer productId = Integer.parseInt(requestParams.get("productId"));
         Integer price = Integer.parseInt(requestParams.get("price"));
@@ -124,20 +150,29 @@ public class InflationService {
     }
 
     public Map<String, Map> getPurchasesMap(String userId) {
+//        List<Goods> goodsList = goodsRepo.findAll();
+//        goodsList.forEach(product -> {
+//            Purchases purchase = purchasesRepo.findAllByUserIdAndProductIdAndDateBetween()
+//        });
+//        purchasesRepo.findAllByUserId(userId).stream().forEach(purchase -> datesList.add(purchase.getDate()));
+
         List<Goods> goodsList = goodsRepo.findAll();
-        Map<String, Map> resultMap = new HashMap<>();
+        LinkedHashMap<String, Map> resultMap = new LinkedHashMap<>();
 
         goodsList.forEach(product -> {
-            List<Purchases> productList = purchasesRepo.findAllByUserIdAndProductId(userId, product.getId());
-            Map<String, Integer> tmpMap = new HashMap<>();
+            List<Purchases> purchasesList = purchasesRepo.findAllByUserIdAndProductId(userId, product.getId());
+            LinkedHashMap<String, Integer> tmpMap = new LinkedHashMap<>();
 
-            productList.forEach(item -> {
-                tmpMap.put(item.getDate().toString(), item.getPrice());
-                resultMap.put(product.getName(), tmpMap);
-            });
+            purchasesList
+                    .stream()
+                    .sorted(Comparator.comparing(Purchases::getDate))
+                    .forEachOrdered(purchase -> {
+                        tmpMap.put(purchase.getDate().toString(), purchase.getPrice());
+                        resultMap.put(product.getName(), tmpMap);
+                    });
 
         });
-
+        System.out.println(resultMap.toString());
         return resultMap;
 
     }

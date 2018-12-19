@@ -28,7 +28,6 @@
             "#00ffff",
             "#00008b",
             "#008b8b",
-            "#a9a9a9",
             "#006400",
             "#bdb76b",
             "#8b008b",
@@ -62,8 +61,8 @@
 
         $( document ).ready(function() {
 
-            var data = [];
-            var dateArr = [];
+            var chartData = [];
+            var dateLabels = [];
 
             $.each(charts, function (productName, datePriceArr) {
                 var arr = [];
@@ -71,7 +70,7 @@
                 colors = jQuery.grep(colors, function(value) {
                     return value != color;
                 });
-                data.push({
+                chartData.push({
                     label: productName,
                     fill: false,
                     backgroundColor: color,
@@ -81,7 +80,7 @@
 
                 $.each(datePriceArr, function (date, price) {
                     arr.push({x: new Date(date), y: price});
-                    dateArr.push(date);
+                    dateLabels.push(date);
                 });
             });
 
@@ -91,11 +90,28 @@
                 type: 'line',
                 // labels: unique(dateArr.reverse()),
                 data: {
-                    labels: unique(dateArr).sort(),
-                    datasets: data
+                    labels: unique(dateLabels).sort(),
+                    datasets: chartData
                 },
                 options: {
+                    elements: {
+                        line: {
+                            tension: 0
+                        }
+                    },
                     scales: {
+                        xAxes: [{
+                            ticks: {
+                                //autoSkip:true,
+                            },
+                            type: 'time',
+                            time: {
+                                unit: 'day',
+                                displayFormats: {
+
+                                }
+                            }
+                        }],
                         yAxes: [{
                             ticks: {
                                 beginAtZero:true
@@ -104,6 +120,8 @@
                     }
                 }
             });
+
+            console.log(chartData);
 
             function unique(array){
                 return array.filter(function(el, index, arr) {

@@ -34,4 +34,9 @@ public interface PurchasesRepo extends JpaRepository<Purchases, Integer> {
             String id,
             LocalDate startDate,
             LocalDate endDate);
+
+    Purchases findAllByUserIdAndProductIdAndDateBetween(String userId,
+                                                        Integer productId,
+                                                        LocalDate startDate,
+                                                        LocalDate endDate);
 }
