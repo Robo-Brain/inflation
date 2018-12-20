@@ -19,6 +19,9 @@ public class PurchasesModel {
     LocalDate purchaseDate;
     @Getter
     @Setter
+    String userId;
+    @Getter
+    @Setter
     String userName;
     @Getter
     @Setter

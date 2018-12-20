@@ -2,6 +2,8 @@ package com.robo.service;
 
 import com.robo.Entities.Goods;
 import com.robo.Entities.Purchases;
+import com.robo.Entities.Shops;
+import com.robo.Entities.User;
 import com.robo.Model.PurchasesModel;
 import com.robo.repository.GoodsRepo;
 import com.robo.repository.PurchasesRepo;
@@ -122,11 +124,11 @@ public class InflationService {
             PurchasesModel purchaseModel = new PurchasesModel();
             purchaseModel.setId(purchase.getId());
             purchaseModel.setPurchaseDate(purchase.getDate());
-            purchaseModel.setUserName(userDetailsRepo.findById(purchase.getUserId()).map(user -> user.getName()).orElse(null));
+            purchaseModel.setUserName(userDetailsRepo.findById(purchase.getUserId()).map(User::getName).orElse(null));
             purchaseModel.setProductId(purchase.getProductId());
-            purchaseModel.setProductName(goodsRepo.findById(purchase.getProductId()).map(product -> product.getName()).orElse(null));
+            purchaseModel.setProductName(goodsRepo.findById(purchase.getProductId()).map(Goods::getName).orElse(null));
             purchaseModel.setPrice(purchase.getPrice());
-            purchaseModel.setShopName(shopsRepo.findById(purchase.getShopId()).map(shop -> shop.getName()).orElse(null));
+            purchaseModel.setShopName(shopsRepo.findById(purchase.getShopId()).map(Shops::getName).orElse(null));
             purchasesResult.add(purchaseModel);
         });
         return purchasesResult;
@@ -140,41 +142,31 @@ public class InflationService {
             PurchasesModel purchaseModel = new PurchasesModel();
             purchaseModel.setId(purchase.getId());
             purchaseModel.setPurchaseDate(purchase.getDate());
-            purchaseModel.setUserName(userDetailsRepo.findById(purchase.getUserId()).map(user -> user.getName()).orElse(null));
-            purchaseModel.setProductName(goodsRepo.findById(purchase.getProductId()).map(product -> product.getName()).orElse(null));
+            purchaseModel.setUserId(purchase.getUserId());
+            purchaseModel.setUserName(userDetailsRepo.findById(purchase.getUserId()).map(User::getName).orElse(null));
+            purchaseModel.setProductName(goodsRepo.findById(purchase.getProductId()).map(Goods::getName).orElse(null));
             purchaseModel.setPrice(purchase.getPrice());
-            purchaseModel.setShopName(shopsRepo.findById(purchase.getShopId()).map(shop -> shop.getName()).orElse(null));
+            purchaseModel.setShopName(shopsRepo.findById(purchase.getShopId()).map(Shops::getName).orElse(null));
             purchasesResult.add(purchaseModel);
         });
         return purchasesResult;
     }
 
     public Map<String, Map> getPurchasesMap(String userId) {
-//        List<Goods> goodsList = goodsRepo.findAll();
-//        goodsList.forEach(product -> {
-//            Purchases purchase = purchasesRepo.findAllByUserIdAndProductIdAndDateBetween()
-//        });
-//        purchasesRepo.findAllByUserId(userId).stream().forEach(purchase -> datesList.add(purchase.getDate()));
-
         List<Goods> goodsList = goodsRepo.findAll();
         LinkedHashMap<String, Map> resultMap = new LinkedHashMap<>();
 
         goodsList.forEach(product -> {
-            List<Purchases> purchasesList = purchasesRepo.findAllByUserIdAndProductId(userId, product.getId());
             LinkedHashMap<String, Integer> tmpMap = new LinkedHashMap<>();
-
-            purchasesList
+            purchasesRepo.findAllByUserIdAndProductId(userId, product.getId())
                     .stream()
                     .sorted(Comparator.comparing(Purchases::getDate))
                     .forEachOrdered(purchase -> {
                         tmpMap.put(purchase.getDate().toString(), purchase.getPrice());
                         resultMap.put(product.getName(), tmpMap);
                     });
-
         });
-        System.out.println(resultMap.toString());
         return resultMap;
-
     }
 
     public List<PurchasesModel> getPurchasesByDate(String date) {
@@ -186,10 +178,10 @@ public class InflationService {
             PurchasesModel purchaseModel = new PurchasesModel(
                     purchase.getId(),
                     purchase.getDate(),
-                    userDetailsRepo.findById(purchase.getUserId()).map(user -> user.getName()).orElse(null),
-                    goodsRepo.findById(purchase.getProductId()).map(product -> product.getName()).orElse(null),
+                    userDetailsRepo.findById(purchase.getUserId()).map(User::getName).orElse(null),
+                    goodsRepo.findById(purchase.getProductId()).map(Goods::getName).orElse(null),
                     purchase.getPrice(),
-                    shopsRepo.findById(purchase.getShopId()).map(shop -> shop.getName()).orElse(null)
+                    shopsRepo.findById(purchase.getShopId()).map(Shops::getName).orElse(null)
             );
             purchasesResult.add(purchaseModel);
         });

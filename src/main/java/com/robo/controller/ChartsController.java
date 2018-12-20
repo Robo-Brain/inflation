@@ -1,6 +1,7 @@
 package com.robo.controller;
 
 import com.robo.Entities.User;
+import com.robo.repository.UserDetailsRepo;
 import com.robo.service.InflationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -8,9 +9,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @Controller
 @RequestMapping("/charts")
@@ -18,6 +19,8 @@ public class ChartsController {
 
     @Autowired
     InflationService inflationService;
+    @Autowired
+    UserDetailsRepo userDetailsRepo;
 
     private ThreadLocal<User> userSession = new ThreadLocal<>();
 
@@ -32,12 +35,20 @@ public class ChartsController {
 
             model.addAttribute("myPurchases", inflationService.getPurchasesByUserId(userSession.get().getId()));
             model.addAttribute("charts", inflationService.getPurchasesMap(userSession.get().getId()));
+            model.addAttribute("users", userDetailsRepo.findAll());
 
         }
+    }
+
+    @GetMapping("/getPurchasesByUserId")
+    @ResponseBody
+    public Map<String, Map> getPurchasesMapByUserId(@RequestParam String userId){
+        return inflationService.getPurchasesMap(userId);
     }
 
     @GetMapping
     public String main() {
         return "charts";
     }
+
 }

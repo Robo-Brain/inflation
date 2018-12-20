@@ -134,3 +134,10 @@
     width: 20%;
     padding: 0.1em 0 0.1em 1em;
 }
+
+#userGraphTable {
+    float: right;
+}
+#userGraphTable select{
+    font-size: 1.3em;
+}
